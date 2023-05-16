@@ -13,7 +13,7 @@ struct MacroClient: App {
     
     var body: some Scene {
         WindowGroup {
-            MainView(tempData: tempData)
+            Login(tempData: tempData)
                 /*.task {
                     await tempData.fetchRemoteGames()
                 }*/

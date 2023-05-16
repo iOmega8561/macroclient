@@ -21,6 +21,7 @@
 		E3BFC15A29FD30A50025609E /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BFC15929FD30A50025609E /* Dashboard.swift */; };
 		E3BFC15D29FD496C0025609E /* TempData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BFC15C29FD496C0025609E /* TempData.swift */; };
 		E3BFC15F29FD82AD0025609E /* RequestBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BFC15E29FD82AD0025609E /* RequestBox.swift */; };
+		E3DF33732A13D3850071E1B5 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DF33722A13D3850071E1B5 /* Login.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +40,7 @@
 		E3BFC15929FD30A50025609E /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		E3BFC15C29FD496C0025609E /* TempData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempData.swift; sourceTree = "<group>"; };
 		E3BFC15E29FD82AD0025609E /* RequestBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBox.swift; sourceTree = "<group>"; };
+		E3DF33722A13D3850071E1B5 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,9 +74,10 @@
 			isa = PBXGroup;
 			children = (
 				E3371FA429F8438800A5F810 /* App.swift */,
-				E3BFC15B29FD3D6D0025609E /* UtilityUIs */,
-				E3BFC15829FD2DD80025609E /* RemoteRequests */,
-				E3B151F92A0BE93A00907396 /* NewRequest */,
+				E3DF33722A13D3850071E1B5 /* Login.swift */,
+				E3BFC15B29FD3D6D0025609E /* Miscellaneous */,
+				E3BFC15829FD2DD80025609E /* RequestViewing */,
+				E3B151F92A0BE93A00907396 /* RequestCreation */,
 				E3371FB229F8447A00A5F810 /* DataHandling */,
 				E3371FA829F8438900A5F810 /* Assets.xcassets */,
 				E3371FB729F84EF500A5F810 /* LaunchScreen.storyboard */,
@@ -101,32 +104,32 @@
 			path = DataHandling;
 			sourceTree = "<group>";
 		};
-		E3B151F92A0BE93A00907396 /* NewRequest */ = {
+		E3B151F92A0BE93A00907396 /* RequestCreation */ = {
 			isa = PBXGroup;
 			children = (
 				E3B151F72A0BE37400907396 /* GameConfig.swift */,
 				E3B151FA2A0BE98700907396 /* GameSelection.swift */,
 			);
-			path = NewRequest;
+			path = RequestCreation;
 			sourceTree = "<group>";
 		};
-		E3BFC15829FD2DD80025609E /* RemoteRequests */ = {
+		E3BFC15829FD2DD80025609E /* RequestViewing */ = {
 			isa = PBXGroup;
 			children = (
 				E3371FA629F8438800A5F810 /* MainView.swift */,
 				E3BFC15929FD30A50025609E /* Dashboard.swift */,
 				E3BFC15E29FD82AD0025609E /* RequestBox.swift */,
 			);
-			path = RemoteRequests;
+			path = RequestViewing;
 			sourceTree = "<group>";
 		};
-		E3BFC15B29FD3D6D0025609E /* UtilityUIs */ = {
+		E3BFC15B29FD3D6D0025609E /* Miscellaneous */ = {
 			isa = PBXGroup;
 			children = (
 				E3371FB929F8502B00A5F810 /* CustomProgress.swift */,
 				E3BFC15629FD2A4C0025609E /* RemoteImage.swift */,
 			);
-			path = UtilityUIs;
+			path = Miscellaneous;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -203,6 +206,7 @@
 				E3371FA729F8438800A5F810 /* MainView.swift in Sources */,
 				E3B151FB2A0BE98700907396 /* GameSelection.swift in Sources */,
 				E3BFC15D29FD496C0025609E /* TempData.swift in Sources */,
+				E3DF33732A13D3850071E1B5 /* Login.swift in Sources */,
 				E3371FB429F844B400A5F810 /* WebAPI.swift in Sources */,
 				E3371FBA29F8502B00A5F810 /* CustomProgress.swift in Sources */,
 				E3BFC15A29FD30A50025609E /* Dashboard.swift in Sources */,
