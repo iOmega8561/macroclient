@@ -1,6 +1,6 @@
 //
 //  GameSelection.swift
-//  iOSwebtest
+//  MacroClient
 //
 //  Created by Giuseppe Rocco on 10/05/23.
 //
@@ -11,11 +11,20 @@ struct GameSelection: View {
     @StateObject var tempData: TempData    
     @State var searchText: String = ""
     
+    
+    
     var body: some View {
         NavigationStack {
             List(searchResults, id: \.self) { game in
-                NavigationLink(destination: GameConfig(tempData: tempData, newRequest: LocalRequest(
+                NavigationLink(destination: GameConfig(tempData: tempData, newRequest: UserRequest(
+                    uuid: "localrequest",
+                    user_id: "localuser",
                     game: game,
+                    time: 10,
+                    mic: false,
+                    region: mainRegions[0],
+                    pnumber: 1,
+                    skills: [],
                     plat: tempData.games[game]!.plat[0],
                     mode: tempData.games[game]!.modes[0]
                 ))) {

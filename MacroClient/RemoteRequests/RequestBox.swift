@@ -1,6 +1,6 @@
 //
 //  RequestBox.swift
-//  iOSwebtest
+//  MacroClient
 //
 //  Created by Giuseppe Rocco on 29/04/23.
 //
@@ -42,7 +42,7 @@ struct RequestBox: View {
                                     
                                     HStack {
                                         Spacer().frame(maxWidth: proxy.size.width * 0.07)
-                                        Text("👤 \(request.pnumber)   \(request.skills.joined(separator: ", "))")
+                                        Text("👤 \(request.pnumber)   \(request.skills.count > 0 ? request.skills.joined(separator: ", "):"Any role")")
                                             .font(.system(size: 20, weight: .semibold))
                                             .lineLimit(1)
                                         

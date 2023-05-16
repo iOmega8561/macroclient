@@ -1,23 +1,11 @@
 //
 //  Model.swift
-//  iOSwebtest
+//  MacroClient
 //
 //  Created by Giuseppe Rocco on 25/04/23.
 //
 
 import Foundation
-
-struct LocalRequest {
-    var game: String
-    var time: Int = 10
-    var desc: String = "nodescription"
-    var mic: Bool = false
-    var region: String = mainRegions[0]
-    var pnumber: Int = 1
-    var skills: [String] = []
-    var plat: String
-    var mode: String
-}
 
 struct Game: Codable, Hashable {
     var name: String
@@ -48,7 +36,6 @@ struct UserRequest: Codable, Hashable {
     var user_id: String
     var game: String
     var time: Int
-    var desc: String
     var mic: Bool
     var region: String
     var pnumber: Int
@@ -61,7 +48,6 @@ struct UserRequest: Codable, Hashable {
         case user_id
         case game
         case time
-        case desc
         case mic
         case region
         case pnumber

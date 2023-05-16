@@ -1,6 +1,6 @@
 //
 //  NewRequest.swift
-//  iOSwebtest
+//  MacroClient
 //
 //  Created by Giuseppe Rocco on 10/05/23.
 //
@@ -10,7 +10,7 @@ import SwiftUI
 struct GameConfig: View {
     @StateObject var tempData: TempData
     
-    @State var newRequest: LocalRequest
+    @State var newRequest: UserRequest
     
     var body: some View {
         NavigationStack {
@@ -56,7 +56,7 @@ struct GameConfig: View {
                     
                     Stepper("Players needed: \(newRequest.pnumber)", value: $newRequest.pnumber, in: 1...20, step: 1)
                     
-                    Stepper("Expiration time: \(newRequest.time) min", value: $newRequest.time, in: 10...120, step: 10)
+                    Stepper("Expiration time: \(newRequest.time) min", value: $newRequest.time, in: 5...120, step: 5)
                     
                     Picker("Region", selection: $newRequest.region) {
                         ForEach(mainRegions, id: \.self) { region in
@@ -65,13 +65,13 @@ struct GameConfig: View {
                     }.pickerStyle(.menu)
                 }
                 
-                Section(header: Text("Brief description")) {
+                /*Section(header: Text("Brief description")) {
                     TextField("Description text", text: $newRequest.desc, axis: .vertical)
                         .lineLimit(5)
                         .padding(10)
                         .font(.system(size: 20.0))
                         .cornerRadius(10.0)
-                }
+                }*/
             }
             .navigationTitle(newRequest.game)
             .toolbar {

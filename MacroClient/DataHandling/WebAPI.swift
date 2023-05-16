@@ -1,6 +1,6 @@
 //
 //  WebAPI.swift
-//  iOSwebtest
+//  MacroClient
 //
 //  Created by Giuseppe Rocco on 25/04/23.
 //
@@ -27,7 +27,7 @@ class WebAPI {
     }
     
     func insert(newRequest: UserRequest) async throws -> String {
-        var urlString = "\(apiURLBase)/insert?user=\(newRequest.user_id)&game=\(newRequest.game.sanitazedHttp())&time=\(newRequest.time)&desc=\(newRequest.desc.sanitazedHttp())&mic=\(newRequest.mic)&region=\(newRequest.region)&pnumber=\(newRequest.pnumber)&mode=\(newRequest.mode.sanitazedHttp())&plat=\(newRequest.plat)"
+        var urlString = "\(apiURLBase)/insert?user=\(newRequest.user_id)&game=\(newRequest.game.sanitazedHttp())&time=\(newRequest.time)&mic=\(newRequest.mic)&region=\(newRequest.region)&pnumber=\(newRequest.pnumber)&mode=\(newRequest.mode.sanitazedHttp())&plat=\(newRequest.plat)"
         
         for skill in newRequest.skills {
             urlString = urlString + "&skills=\(skill.sanitazedHttp())"

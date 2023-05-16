@@ -1,6 +1,6 @@
 //
 //  TempData.swift
-//  iOSwebtest
+//  MacroClient
 //
 //  Created by Giuseppe Rocco on 29/04/23.
 //
@@ -16,21 +16,9 @@ class TempData: ObservableObject {
     @Published var games: [String: Game] = [:]
     @Published var requests: [String: UserRequest] = [:]
     
-    func insertUserRequest(newRequest: LocalRequest) async {
+    func insertUserRequest(newRequest: UserRequest) async {
         do {
-            let _: String = try await webAPI.insert(newRequest: UserRequest(
-                    uuid: "not_unique",
-                    user_id: "someuser@mail.com",
-                    game: newRequest.game,
-                    time: newRequest.time,
-                    desc: newRequest.desc,
-                    mic: newRequest.mic,
-                    region: newRequest.region,
-                    pnumber: newRequest.pnumber,
-                    skills: newRequest.skills,
-                    plat: newRequest.plat,
-                    mode: newRequest.mode
-            ))
+            let _: String = try await webAPI.insert(newRequest: newRequest)
         } catch {
             print("Error inserting user request \(String(describing: error))")
         }
