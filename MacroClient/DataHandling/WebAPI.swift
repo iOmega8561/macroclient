@@ -33,13 +33,13 @@ class WebAPI {
             urlString = urlString + "&skills=\(skill.sanitazedHttp())"
         }
         
-        let api = APIRequest<ResponseMessage>(urlString: urlString)
+        let api = APIRequest<SimpleResponse>(urlString: urlString)
         let response = try await request(api)
         return response.answer
     }
     
     func delete(uuid: String) async throws -> String {
-        let api = APIRequest<ResponseMessage>(urlString: "\(apiURLBase)/delete?uuid=\(uuid)")
+        let api = APIRequest<SimpleResponse>(urlString: "\(apiURLBase)/delete?uuid=\(uuid)")
         let response = try await request(api)
         return response.answer
     }
@@ -57,5 +57,25 @@ class WebAPI {
         let request = URLRequest(url: requestURL)
         let data = try await URLSession.shared.data(for: request, delegate: nil).0
         return try apiRequest.decodeJSON(data)
+    }
+}
+
+struct APIRequest<T: Decodable> {
+    var urlString: String
+    let decodeJSON: (Data) throws -> T
+}
+
+extension APIRequest {
+    init(urlString: String) {
+        self.urlString = urlString
+        self.decodeJSON = { data in
+            return try JSONDecoder().decode(T.self, from: data)
+        }
+    }
+}
+
+extension String {
+    func sanitazedHttp() -> String {
+        return self.replacingOccurrences(of: " ", with: "%20")
     }
 }

@@ -65,27 +65,7 @@ class ServerRequests: Codable {
     }
 }
 
-struct APIRequest<T: Decodable> {
-    var urlString: String
-    let decodeJSON: (Data) throws -> T
-}
-
-extension APIRequest {
-    init(urlString: String) {
-        self.urlString = urlString
-        self.decodeJSON = { data in
-            return try JSONDecoder().decode(T.self, from: data)
-        }
-    }
-}
-
-extension String {
-    func sanitazedHttp() -> String {
-        return self.replacingOccurrences(of: " ", with: "%20")
-    }
-}
-
-struct ResponseMessage: Codable {
+struct SimpleResponse: Codable {
     var answer: String
     
     private enum CodingKeys: String, CodingKey {
