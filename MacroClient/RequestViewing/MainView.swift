@@ -8,40 +8,41 @@
 import SwiftUI
 
 struct MainView: View {
-    @StateObject var tempData: TempData
+    @StateObject var appData: AppData
     @State var refreshDone: Bool = false
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             GeometryReader { proxy in
                 
                 if !refreshDone {
                     CustomProgress(withText: true)
                     
-                } else if tempData.requests.count < 1 {
-                    GameSelection(tempData: tempData)
+                } else if appData.requests.count < 1 {
+                    GameSelection(appData: appData)
                     
                 } else {
-                    Dashboard(deviceProxy: proxy, tempData: tempData)
+                    Dashboard(deviceProxy: proxy, appData: appData)
                         .navigationBarTitleDisplayMode(.large)
                         .navigationTitle("Requests")
                         .refreshable {
-                            refreshDone = await tempData.fetchUserRequests()
+                            refreshDone = await appData.fetchUserRequests()
                         }
                 }
             }
         }
+        .navigationViewStyle(StackNavigationViewStyle())
         .task {
             // This needs to go once the App is build
-            await tempData.fetchRemoteGames()
+            await appData.fetchRemoteGames()
             
-            refreshDone = await tempData.fetchUserRequests()
+            refreshDone = await appData.fetchUserRequests()
         }
     }
 }
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView(tempData: TempData())
+        MainView(appData: AppData())
     }
 }

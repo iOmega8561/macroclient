@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct RequestBox: View {
-    @StateObject var tempData: TempData
-    
+    let games: [String: Game]
     let request: UserRequest
     
     let rG: RadialGradient = RadialGradient(colors: [ .white, .gray], center: .center, startRadius: 20, endRadius: 500)
@@ -28,7 +27,7 @@ struct RequestBox: View {
                             Spacer().frame(height: proxy.size.height * 0.07)
                             
                             HStack {
-                                RemoteImage(imgname: tempData.games[request.game]?.imgname ?? "game_generic")
+                                RemoteImage(imgname: games[request.game]?.imgname ?? "game_generic")
                                     .frame(width: 60.0, height: 60.0)
                                     .shadow(radius: 4.0)
                                 
@@ -89,6 +88,6 @@ struct RequestBox: View {
 struct RequestBox_Previews: PreviewProvider {
     static var previews: some View {
         //RequestBox()
-        MainView(tempData: TempData())
+        MainView(appData: AppData())
     }
 }

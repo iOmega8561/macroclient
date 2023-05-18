@@ -13,22 +13,10 @@ struct Game: Codable, Hashable {
     var plat: [String]
     var modes: [String]
     var skills: [String]
-    
-    private enum CodingKeys: String, CodingKey {
-        case name
-        case imgname
-        case plat
-        case modes
-        case skills
-    }
 }
 
 struct ServerGames: Codable {
     var games: [String: Game]
-    
-    private enum CodingKeys: String, CodingKey {
-        case games
-    }
 }
 
 struct UserRequest: Codable, Hashable {
@@ -42,33 +30,12 @@ struct UserRequest: Codable, Hashable {
     var skills: [String]
     var plat: String
     var mode: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case uuid
-        case user_id
-        case game
-        case time
-        case mic
-        case region
-        case pnumber
-        case skills
-        case plat
-        case mode
-    }
 }
 
 class ServerRequests: Codable {
     var requests: [String: UserRequest]
-    
-    private enum CodingKeys: String, CodingKey {
-        case requests
-    }
 }
 
 struct SimpleResponse: Codable {
     var answer: String
-    
-    private enum CodingKeys: String, CodingKey {
-        case answer
-    }
 }

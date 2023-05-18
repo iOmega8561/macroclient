@@ -9,11 +9,11 @@ import SwiftUI
 
 @main
 struct MacroClient: App {
-    @StateObject var tempData: TempData = TempData()
+    @StateObject var appData: AppData = AppData()
     
     var body: some Scene {
         WindowGroup {
-            Login(tempData: tempData)
+            Login(appData: appData)
                 /*.task {
                     await tempData.fetchRemoteGames()
                 }*/
