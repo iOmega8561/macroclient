@@ -56,6 +56,12 @@ struct AvatarPicker: View {
                 }
             }
         }
+        .task {
+            if appData.localProfile.avatar != "user_generic" {
+                let avatar = appData.localProfile.avatar
+                selection = Int(avatar.replacingOccurrences(of: "user", with: ""))!
+            }
+        }
     }
 }
 

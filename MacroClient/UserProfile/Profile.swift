@@ -16,54 +16,51 @@ struct Profile: View {
     
     var body: some View {
         NavigationView {
-            ZStack {
-                Color(UIColor.systemGroupedBackground)
-                    .ignoresSafeArea()
-                /*Color(red: 0.949, green: 0.949, blue: 0.971)
-                    .ignoresSafeArea()*/
+            List {
+                Section {
+                    HStack {
+                        Spacer()
+                        VStack {
+                            ZStack(alignment: .bottomTrailing) {
+                                RemoteImage(imgname: appData.localProfile.avatar, squareSize: 130)
+                                    .clipShape(Circle())
+                                    .frame(width: 130, height: 130)
+                                
+                                Button(action: {showModal = true}) {
+                                    Image(systemName: "pencil.circle.fill")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 30)
+                                        .padding(.horizontal)
+                                }.sheet(isPresented: $showModal) {
+                                    AvatarPicker(appData: appData)
+                                }
+                            }
+                            
+                            Text(appData.localProfile.username)
+                                .font(.title)
+                        }
+                        Spacer()
+                    }
+                }.listRowBackground(Color.clear)
                 
-                VStack {
-                    Spacer().frame(height: 10)
-                    
-                    ZStack(alignment: .bottomTrailing) {
-                        RemoteImage(imgname: appData.localProfile.avatar, squareSize: 130)
-                            .clipShape(Circle())
-                            .frame(width: 130, height: 130)
-                        
-                        Button(action: {showModal = true}) {
-                            Image(systemName: "pencil.circle.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 30)
-                                .padding(.horizontal)
-                        }.sheet(isPresented: $showModal) {
-                            AvatarPicker(appData: appData)
+                Section(header: Text("Authentication")) {
+                    Button(action: { showDialog.toggle() }) {
+                        HStack {
+                            Spacer()
+                            Text("Log out")
+                                .foregroundColor(.red)
+                            Spacer()
                         }
                     }
-                    
-                    Text(appData.localProfile.username)
-                        .font(.title)
-                    
-                    Form {
-                        Section(header: Text("Authentication")) {
-                            Button(action: { showDialog.toggle() }) {
-                                HStack {
-                                    Spacer()
-                                    Text("Log out")
-                                        .foregroundColor(.red)
-                                    Spacer()
-                                }
+                    .confirmationDialog("Are you sure?", isPresented: $showDialog, titleVisibility: .visible) {
+                        Button(role: .destructive) {
+                            Task {
+                                await appData.logout()
+                                showDialog = false; loggedIn = false
                             }
-                            .confirmationDialog("Are you sure?", isPresented: $showDialog, titleVisibility: .visible) {
-                                Button(role: .destructive) {
-                                    Task {
-                                        await appData.logout()
-                                        showDialog = false; loggedIn = false
-                                    }
-                                } label: {
-                                    Text("Yes, log me out.")
-                                }
-                            }
+                        } label: {
+                            Text("Yes, log me out.")
                         }
                     }
                 }
