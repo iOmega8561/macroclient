@@ -16,10 +16,12 @@ struct Profile: View {
     @State var showModal: Bool = false
     @State var error: Bool = false
     
-    var myRequests: [String: UserRequest] {
-        return appData.requests.filter {
+    var myRequests: [UserRequest] {
+        let new = appData.requests.filter {
             $0.value.user_id == appData.authData.username
-        }
+        }.map{$0.value}
+        
+        return new.sorted(by: {$0.date > $1.date})
     }
     
     var body: some View {
@@ -63,7 +65,7 @@ struct Profile: View {
                                 
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack {
-                                        ForEach(myRequests.map{$0.value}, id: \.self) { req in
+                                        ForEach(myRequests, id: \.self) { req in
                                             NavigationLink(destination: RequestDetails(appData: appData, request: req)) {
                                                 RequestBox(games: appData.games, request: req)
                                                     .frame(width: proxy.size.width * 0.92, height: proxy.size.height * 0.24)

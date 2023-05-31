@@ -13,10 +13,12 @@ struct Dashboard: View {
     @State var logoutActive: Bool = false
     @StateObject var appData: AppData
     
-    var notMyRequests: [String: UserRequest] {
-        return appData.requests.filter {
+    var notMyRequests: [UserRequest] {
+        let new = appData.requests.filter {
             $0.value.user_id != appData.authData.username
-        }
+        }.map{$0.value}
+        
+        return new.sorted(by: {$0.date > $1.date})
     }
     
     var body: some View {
@@ -36,7 +38,7 @@ struct Dashboard: View {
                                     Text("")
                                 }
                                 
-                                ForEach(notMyRequests.map{$0.value}, id: \.self) { req in
+                                ForEach(notMyRequests, id: \.self) { req in
                                     NavigationLink(destination: RequestDetails(appData: appData, request: req)) {
                                         RequestBox(games: appData.games, request: req)
                                             .frame(width: proxy.size.width * 0.92, height: proxy.size.height * 0.24)
