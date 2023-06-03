@@ -11,10 +11,13 @@ struct Profile: View {
     @StateObject var appData: AppData
     @Binding var loggedIn: Bool
     
-    @State var showDialog: Bool = false
+    @State var deleteDialog: Bool = false
+    @State var logOutDialog: Bool = false
     @State var avatarPicker: Bool = false
     @State var showModal: Bool = false
     @State var error: Bool = false
+    
+    let gradient: LinearGradient = LinearGradient(colors: [Color("CardBG_2"), Color("CardBG_1")], startPoint: .bottom, endPoint: .top)
     
     var myRequests: [UserRequest] {
         let new = appData.requests.filter {
@@ -28,7 +31,7 @@ struct Profile: View {
         NavigationView {
             GeometryReader { proxy in
                 ZStack {
-                    Color(UIColor.systemGroupedBackground).ignoresSafeArea()
+                    Color("BG").ignoresSafeArea()
                     
                     ScrollView {
                         VStack {
@@ -66,23 +69,32 @@ struct Profile: View {
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     LazyHStack {
                                         ForEach(myRequests, id: \.self) { req in
-                                            NavigationLink(destination: RequestDetails(appData: appData, request: req)) {
-                                                RequestBox(games: appData.games, request: req)
-                                                    .frame(width: proxy.size.width * 0.92, height: proxy.size.height * 0.24)
+                                            NavigationLink(destination: LobbyDetails(appData: appData, request: req, userDetailEnabled: false)) {
+                                                LobbyBox(games: appData.games, request: req)
+                                                    .frame(width: proxy.size.width * 0.92, height: 120)
                                             }
                                             .foregroundColor(.primary)
                                             .contextMenu {
                                                 Button(role: .destructive) {
+                                                    deleteDialog.toggle()
+                                                } label: {
+                                                    Label("Delete request", systemImage: "x.circle")
+                                                }
+                                                
+                                            }
+                                            .confirmationDialog("Are you sure?", isPresented: $deleteDialog, titleVisibility: .visible) {
+                                                Button(role: .destructive) {
+                                                    deleteDialog = false
                                                     Task {
                                                         await appData.deleteUserRequest(uuid: req.uuid)
                                                     }
                                                 } label: {
-                                                    Label("Delete request", systemImage: "x.circle")
+                                                    Text("Yes, delete it.")
                                                 }
                                             }
                                         }
-                                    }.padding(.horizontal)
-                                }
+                                    }//.padding(.horizontal)
+                                }.padding(.horizontal)
                             }.padding(.vertical)
                             
                             VStack(alignment: .leading) {
@@ -122,7 +134,7 @@ struct Profile: View {
                                                     .frame(width: 60, height: 60)
                                                     .padding()
                                             }
-                                            .background(Color(UIColor.secondarySystemGroupedBackground))
+                                            .background(gradient)
                                             .clipShape(RoundedRectangle(cornerRadius: 10))
                                             .contextMenu {
                                                 Button(role: .destructive) {
@@ -137,25 +149,27 @@ struct Profile: View {
                                                 }
                                             }
                                         }
-                                    }.padding(.horizontal)
+                                    }
                                 }
-                            }.padding(.bottom)
+                                .padding(.horizontal)
+                            }
+                            .padding(.bottom)
                             
-                            Button(action: { showDialog.toggle() }) {
+                            Button(action: { logOutDialog.toggle() }) {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color(UIColor.secondarySystemGroupedBackground))
+                                    .fill(Color("CardBG_2"))
                                     .frame(height: 40.0)
                                     .overlay {
                                         Text("Log out")
-                                            .foregroundColor(.red)
+                                            .foregroundColor(.primary)
                                     }
                             }
                             .padding(.horizontal)
-                            .confirmationDialog("Are you sure?", isPresented: $showDialog, titleVisibility: .visible) {
+                            .confirmationDialog("Are you sure?", isPresented: $logOutDialog, titleVisibility: .visible) {
                                 Button(role: .destructive) {
                                     Task {
                                         await appData.logout()
-                                        showDialog = false; loggedIn = false
+                                        logOutDialog = false; loggedIn = false
                                     }
                                 } label: {
                                     Text("Yes, log me out.")

@@ -18,21 +18,25 @@ struct AvatarPicker: View {
     
     var body: some View {
         NavigationView {
-            GeometryReader { proxy in
-                ScrollView {
-                    LazyVGrid(columns: gridItemLayout, spacing: 10) {
-                        ForEach(0..<6) { i in
-                            Button(action: { selection = i }) {
-                                ZStack(alignment: .bottomTrailing) {
-                                    RemoteImage(imgname: "user\(i)", squareSize: proxy.size.width / 3)
-                                    
-                                    if selection == i {
-                                        Image(systemName: "checkmark.circle.fill")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 30)
-                                            .padding()
-                                            .foregroundColor(.green)
+            ZStack {
+                Color("BG").ignoresSafeArea()
+                
+                GeometryReader { proxy in
+                    ScrollView {
+                        LazyVGrid(columns: gridItemLayout, spacing: 10) {
+                            ForEach(0..<6) { i in
+                                Button(action: { selection = i }) {
+                                    ZStack(alignment: .bottomTrailing) {
+                                        RemoteImage(imgname: "user\(i)", squareSize: proxy.size.width / 3)
+                                        
+                                        if selection == i {
+                                            Image(systemName: "checkmark.circle.fill")
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 30)
+                                                .padding()
+                                                .foregroundColor(.green)
+                                        }
                                     }
                                 }
                             }

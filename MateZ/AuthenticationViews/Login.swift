@@ -21,10 +21,8 @@ struct Login: View {
     var body: some View {
         NavigationView {
             ZStack {
-                Color(UIColor.systemBackground)
+                Color("BG")
                     .ignoresSafeArea()
-                /*Color(red: 0.949, green: 0.949, blue: 0.971)
-                    .ignoresSafeArea()*/
                 
                 VStack(spacing: 28) {
                     Spacer()
@@ -46,18 +44,27 @@ struct Login: View {
                             .foregroundColor(.secondary)
                             .padding(.horizontal)
                         
-                        TextField("", text: $username)
-                            .frame(height: 44)
-                            .background(Color(UIColor.systemFill))
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.red, lineWidth: usernameError ? 5:0)
                             .padding(.horizontal)
-                            .font(.system(size: 20.0))
-                            .autocapitalization(.none)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.red, lineWidth: usernameError ? 3:0)
-                                    .padding(.horizontal)
-                            )
+                            .frame(height: 44)
+                            .overlay {
+                                ZStack {
+                                    Color("CardBG_2")
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    
+                                    TextField("", text: $username)
+                                        .frame(height: 44)
+                                        .background(Color("CardBG_2"))
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .font(.system(size: 20.0))
+                                        .autocapitalization(.none)
+                                        .padding(.horizontal)
+                                }
+                                .padding(.horizontal)
+                                    
+                                
+                            }
                     }
                     
                     VStack(alignment: .leading, spacing: 11) {
@@ -66,18 +73,27 @@ struct Login: View {
                             .foregroundColor(.secondary)
                             .padding(.horizontal)
                         
-                        SecureField("", text: $password)
-                            .frame(height: 44)
-                            .background(Color(UIColor.systemFill))
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(.red, lineWidth: passError ? 5:0)
                             .padding(.horizontal)
-                            .font(.system(size: 20.0))
-                            .autocapitalization(.none)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 10)
-                                    .stroke(.red, lineWidth: passError ? 3:0)
-                                    .padding(.horizontal)
-                            )
+                            .frame(height: 44)
+                            .overlay {
+                                ZStack {
+                                    Color("CardBG_2")
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    
+                                    SecureField("", text: $password)
+                                        .frame(height: 44)
+                                        .background(Color("CardBG_2"))
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .font(.system(size: 20.0))
+                                        .autocapitalization(.none)
+                                        .padding(.horizontal)
+                                }
+                                .padding(.horizontal)
+                                    
+                                
+                            }
                     }
                     
                     
@@ -93,7 +109,7 @@ struct Login: View {
                             NavigationLink(destination: Signup(appData: appData)) {
                                 
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color(UIColor.systemFill))
+                                    .fill(Color("CardBG_2"))
                                     .frame(width: 200, height: 50)
                                     .overlay(
                                         Text("Create an account"))
@@ -105,12 +121,12 @@ struct Login: View {
                             } label: {
                                 
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color(hue: 0.24, saturation: 0.109, brightness: 0.885))
+                                    .fill(Color.accentColor)
                                     .frame(width: 150, height: 50)
                                     .overlay(
                                         Text("Log in"))
                                 
-                            }.foregroundColor(.black)
+                            }.foregroundColor(.primary)
                         }
                     } else {
                         CustomProgress(withText: false)
@@ -119,7 +135,7 @@ struct Login: View {
                     Spacer()
                 }
             }
-        }.navigationViewStyle(StackNavigationViewStyle())
+        }.navigationViewStyle(.stack)
     }
     
     func authenticationManage() async {

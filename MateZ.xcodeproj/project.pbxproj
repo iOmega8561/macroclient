@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		E317A2612A1FA5520007833E /* FavouritePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E317A2602A1FA5520007833E /* FavouritePicker.swift */; };
 		E31CD9182A1662FE00C7C8CC /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31CD9172A1662FE00C7C8CC /* Signup.swift */; };
-		E31CD91A2A16638100C7C8CC /* RequestDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31CD9192A16638100C7C8CC /* RequestDetails.swift */; };
+		E31CD91A2A16638100C7C8CC /* LobbyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31CD9192A16638100C7C8CC /* LobbyDetails.swift */; };
 		E31CD91C2A167FDB00C7C8CC /* StartupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31CD91B2A167FDB00C7C8CC /* StartupView.swift */; };
 		E3371FA529F8438800A5F810 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3371FA429F8438800A5F810 /* App.swift */; };
 		E3371FA929F8438900A5F810 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E3371FA829F8438900A5F810 /* Assets.xcassets */; };
@@ -27,14 +27,15 @@
 		E3BFC15729FD2A4C0025609E /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BFC15629FD2A4C0025609E /* RemoteImage.swift */; };
 		E3BFC15A29FD30A50025609E /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BFC15929FD30A50025609E /* Dashboard.swift */; };
 		E3BFC15D29FD496C0025609E /* AppData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BFC15C29FD496C0025609E /* AppData.swift */; };
-		E3BFC15F29FD82AD0025609E /* RequestBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3BFC15E29FD82AD0025609E /* RequestBox.swift */; };
+		E3D1404B2A2B3858004A16B3 /* LobbyBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D1404A2A2B3858004A16B3 /* LobbyBox.swift */; };
+		E3D1404D2A2B609F004A16B3 /* UneditableProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D1404C2A2B609F004A16B3 /* UneditableProfile.swift */; };
 		E3DF33732A13D3850071E1B5 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3DF33722A13D3850071E1B5 /* Login.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		E317A2602A1FA5520007833E /* FavouritePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePicker.swift; sourceTree = "<group>"; };
 		E31CD9172A1662FE00C7C8CC /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
-		E31CD9192A16638100C7C8CC /* RequestDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestDetails.swift; sourceTree = "<group>"; };
+		E31CD9192A16638100C7C8CC /* LobbyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyDetails.swift; sourceTree = "<group>"; };
 		E31CD91B2A167FDB00C7C8CC /* StartupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartupView.swift; sourceTree = "<group>"; };
 		E3371FA129F8438800A5F810 /* MateZ.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MateZ.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3371FA429F8438800A5F810 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
@@ -53,7 +54,8 @@
 		E3BFC15629FD2A4C0025609E /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		E3BFC15929FD30A50025609E /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		E3BFC15C29FD496C0025609E /* AppData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppData.swift; sourceTree = "<group>"; };
-		E3BFC15E29FD82AD0025609E /* RequestBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBox.swift; sourceTree = "<group>"; };
+		E3D1404A2A2B3858004A16B3 /* LobbyBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyBox.swift; sourceTree = "<group>"; };
+		E3D1404C2A2B609F004A16B3 /* UneditableProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UneditableProfile.swift; sourceTree = "<group>"; };
 		E3DF33722A13D3850071E1B5 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -92,7 +94,7 @@
 				E382071E2A1BC216005293DA /* UserProfile */,
 				E366BB882A15067300438106 /* AuthenticationViews */,
 				E3BFC15B29FD3D6D0025609E /* Miscellaneous */,
-				E3BFC15829FD2DD80025609E /* RequestViewing */,
+				E3BFC15829FD2DD80025609E /* LobbiesViewing */,
 				E3B151F92A0BE93A00907396 /* RequestCreation */,
 				E3371FB229F8447A00A5F810 /* DataHandling */,
 				E3371FA829F8438900A5F810 /* Assets.xcassets */,
@@ -136,6 +138,7 @@
 				E382071C2A1BAE03005293DA /* AvatarPicker.swift */,
 				E317A2602A1FA5520007833E /* FavouritePicker.swift */,
 				E38BAAB82A17AEC5004B6A03 /* Profile.swift */,
+				E3D1404C2A2B609F004A16B3 /* UneditableProfile.swift */,
 			);
 			path = UserProfile;
 			sourceTree = "<group>";
@@ -150,14 +153,14 @@
 			path = RequestCreation;
 			sourceTree = "<group>";
 		};
-		E3BFC15829FD2DD80025609E /* RequestViewing */ = {
+		E3BFC15829FD2DD80025609E /* LobbiesViewing */ = {
 			isa = PBXGroup;
 			children = (
 				E3BFC15929FD30A50025609E /* Dashboard.swift */,
-				E3BFC15E29FD82AD0025609E /* RequestBox.swift */,
-				E31CD9192A16638100C7C8CC /* RequestDetails.swift */,
+				E31CD9192A16638100C7C8CC /* LobbyDetails.swift */,
+				E3D1404A2A2B3858004A16B3 /* LobbyBox.swift */,
 			);
-			path = RequestViewing;
+			path = LobbiesViewing;
 			sourceTree = "<group>";
 		};
 		E3BFC15B29FD3D6D0025609E /* Miscellaneous */ = {
@@ -241,6 +244,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				E38BAAB92A17AEC5004B6A03 /* Profile.swift in Sources */,
+				E3D1404D2A2B609F004A16B3 /* UneditableProfile.swift in Sources */,
+				E3D1404B2A2B3858004A16B3 /* LobbyBox.swift in Sources */,
 				E3B151FB2A0BE98700907396 /* GameSelection.swift in Sources */,
 				E317A2612A1FA5520007833E /* FavouritePicker.swift in Sources */,
 				E3BFC15D29FD496C0025609E /* AppData.swift in Sources */,
@@ -251,9 +256,8 @@
 				E3BFC15A29FD30A50025609E /* Dashboard.swift in Sources */,
 				E31CD9182A1662FE00C7C8CC /* Signup.swift in Sources */,
 				E31CD91C2A167FDB00C7C8CC /* StartupView.swift in Sources */,
-				E31CD91A2A16638100C7C8CC /* RequestDetails.swift in Sources */,
+				E31CD91A2A16638100C7C8CC /* LobbyDetails.swift in Sources */,
 				E33AAF442A279AC800034A0C /* RegionSelect.swift in Sources */,
-				E3BFC15F29FD82AD0025609E /* RequestBox.swift in Sources */,
 				E3BFC15729FD2A4C0025609E /* RemoteImage.swift in Sources */,
 				E3371FA529F8438800A5F810 /* App.swift in Sources */,
 				E33AAF422A2792B700034A0C /* Regions.swift in Sources */,
@@ -394,6 +398,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -426,6 +431,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Dark;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

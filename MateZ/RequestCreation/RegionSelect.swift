@@ -27,40 +27,55 @@ struct RegionSelect: View {
     
     var body: some View {
         NavigationView {
-            List(searchResults, id: \.self) { region in
-                Button {
-                    alpha2Bind = regions[region] ?? "na"
-                    dismiss()
-                } label: {
-                    HStack(spacing: 10) {
-                        Image(regions[region]!)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 35)
-                        
-                        Text(region)
-                            .lineLimit(1)
-                            .foregroundColor(.primary)
-                        
-                        if alpha2Bind == regions[region] ?? "na" {
-                            Spacer()
-                            Image(systemName: "checkmark")
-                                .renderingMode(.template)
-                                .foregroundColor(.accentColor)
+            ZStack {
+                Color("BG").ignoresSafeArea()
+                
+                ScrollView {
+                    LazyVStack {
+                        ForEach(searchResults, id: \.self) { region in
+                            Button {
+                                alpha2Bind = regions[region] ?? "na"
+                                dismiss()
+                            } label: {
+                                HStack(spacing: 10) {
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .fill(Color("CardBG_2"))
+                                        .frame(height: 70)
+                                        .overlay {
+                                            HStack {
+                                                Image(regions[region]!)
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 55)
+                                                    .padding(.trailing)
+                                                
+                                                Text(region)
+                                                    .lineLimit(1)
+                                                    .font(.system(size: 20))
+                                                    .foregroundColor(.primary)
+                                                Spacer()
+                                                
+                                                if alpha2Bind == regions[region] ?? "na" {
+                                                    Image(systemName: "checkmark")
+                                                }
+                                            }.padding(.horizontal)
+                                        }
+                                }
+                            }
                         }
-                    }
+                    }.padding(.horizontal)
                 }
-            }
-            .searchable(text: $searchText)
-            .navigationTitle("Select a region")
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {dismiss()}) {
-                        Image(systemName: "xmark")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 15)
+                .searchable(text: $searchText)
+                .navigationTitle("Select a region")
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button(action: {dismiss()}) {
+                            Image(systemName: "xmark")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 15)
+                        }
                     }
                 }
             }

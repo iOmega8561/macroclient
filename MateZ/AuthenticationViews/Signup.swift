@@ -25,7 +25,7 @@ struct Signup: View {
     
     var body: some View {
         ZStack {
-            Color(UIColor.systemBackground)
+            Color("BG")
                 .ignoresSafeArea()
             
             VStack(spacing: 28) {
@@ -45,18 +45,27 @@ struct Signup: View {
                         .foregroundColor(.secondary)
                         .padding(.horizontal)
                     
-                    TextField("", text: $username)
-                        .frame(height: 44)
-                        .background(Color(UIColor.systemFill))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(.red, lineWidth: usernameError || usernameTaken || invalidChar ? 5:0)
                         .padding(.horizontal)
-                        .font(.system(size: 20.0))
-                        .autocapitalization(.none)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.red, lineWidth: usernameError || usernameTaken || invalidChar ? 3:0)
-                                .padding(.horizontal)
-                        )
+                        .frame(height: 44)
+                        .overlay {
+                            ZStack {
+                                Color("CardBG_2")
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                
+                                TextField("", text: $username)
+                                    .frame(height: 44)
+                                    .background(Color("CardBG_2"))
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .font(.system(size: 20.0))
+                                    .autocapitalization(.none)
+                                    .padding(.horizontal)
+                            }
+                            .padding(.horizontal)
+                                
+                            
+                        }
                 }
                 
                 VStack(alignment: .leading, spacing: 11) {
@@ -65,18 +74,27 @@ struct Signup: View {
                         .foregroundColor(.secondary)
                         .padding(.horizontal)
                     
-                    SecureField("", text: $password)
-                        .frame(height: 44)
-                        .background(Color(UIColor.systemFill))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(.red, lineWidth: passError ? 5:0)
                         .padding(.horizontal)
-                        .font(.system(size: 20.0))
-                        .autocapitalization(.none)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.red, lineWidth: passError ? 3:0)
-                                .padding(.horizontal)
-                        )
+                        .frame(height: 44)
+                        .overlay {
+                            ZStack {
+                                Color("CardBG_2")
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                
+                                SecureField("", text: $password)
+                                    .frame(height: 44)
+                                    .background(Color("CardBG_2"))
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .font(.system(size: 20.0))
+                                    .autocapitalization(.none)
+                                    .padding(.horizontal)
+                            }
+                            .padding(.horizontal)
+                                
+                            
+                        }
                 }
                 
                 VStack(alignment: .leading, spacing: 11) {
@@ -85,18 +103,27 @@ struct Signup: View {
                         .foregroundColor(.secondary)
                         .padding(.horizontal)
                     
-                    SecureField("", text: $password2)
-                        .frame(height: 44)
-                        .background(Color(UIColor.systemFill))
-                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                    RoundedRectangle(cornerRadius: 10)
+                        .stroke(.red, lineWidth: pass2Error ? 5:0)
                         .padding(.horizontal)
-                        .font(.system(size: 20.0))
-                        .autocapitalization(.none)
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 10)
-                                .stroke(.red, lineWidth: pass2Error ? 3:0)
-                                .padding(.horizontal)
-                        )
+                        .frame(height: 44)
+                        .overlay {
+                            ZStack {
+                                Color("CardBG_2")
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                
+                                SecureField("", text: $password2)
+                                    .frame(height: 44)
+                                    .background(Color("CardBG_2"))
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .font(.system(size: 20.0))
+                                    .autocapitalization(.none)
+                                    .padding(.horizontal)
+                            }
+                            .padding(.horizontal)
+                                
+                            
+                        }
                 }
                 
                 if asyncError {
@@ -107,11 +134,11 @@ struct Signup: View {
                 if !isLoading {
                     Button(action: {Task { await signupManage() }}) {
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(hue: 0.24, saturation: 0.109, brightness: 0.885))
+                            .fill(Color.accentColor)
                             .frame(width: 350, height: 50)
                             .overlay(
                                 Text("Create your account"))
-                    }.foregroundColor(.black)
+                    }.foregroundColor(.primary)
                 } else {
                     CustomProgress(withText: false)
                 }

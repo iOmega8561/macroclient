@@ -16,15 +16,17 @@ struct GameConfig: View {
     
     private let defPlats = ["XBOX", "PlayStation", "PC", "Android", "iOS", "Switch"]
     
+    let gradient: LinearGradient = LinearGradient(colors: [Color("CardBG_2"), Color("CardBG_1")], startPoint: .bottom, endPoint: .top)
+    
     var body: some View {
         ZStack {
-            Color(UIColor.systemGroupedBackground)
+            Color("BG")
                 .ignoresSafeArea()
             
             ScrollView {
                 VStack(spacing: 30) {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("SELECT PLATFORM")
+                        Text("PLATFORM")
                             .font(.headline)
                             .foregroundColor(.secondary)
                             .padding(.horizontal)
@@ -57,7 +59,7 @@ struct GameConfig: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("SELECT GAMEMODE")
+                        Text("GAME MODE")
                             .font(.headline)
                             .foregroundColor(.secondary)
                             .padding(.horizontal)
@@ -68,14 +70,14 @@ struct GameConfig: View {
                             }
                         }
                         .pickerStyle(.wheel)
-                        .background(Color(UIColor.secondarySystemGroupedBackground))
+                        .background(gradient)
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .padding(.horizontal)
                     }
                     
                     if appData.games[newRequest.game]!.skills.count > 0 {
                         VStack(alignment: .leading, spacing: 5) {
-                            Text("SELECT GAME ROLES")
+                            Text("GAME ROLES")
                                 .font(.headline)
                                 .foregroundColor(.secondary)
                                 .padding(.horizontal)
@@ -88,7 +90,7 @@ struct GameConfig: View {
                                     } else { newRequest.skills.append(skill) }
                                 } label: {
                                     RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color(UIColor.secondarySystemGroupedBackground))
+                                        .fill(Color("CardBG_2"))
                                         .frame(height: 40.0)
                                         .overlay {
                                             HStack {
@@ -99,8 +101,6 @@ struct GameConfig: View {
                                                 if newRequest.skills.firstIndex(of: skill) != nil {
                                                     
                                                     Image(systemName: "checkmark")
-                                                        .renderingMode(.template)
-                                                        .foregroundColor(.accentColor)
                                                 }
                                             }.padding(.horizontal)
                                         }
@@ -117,16 +117,17 @@ struct GameConfig: View {
                             .padding(.horizontal)
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(UIColor.secondarySystemGroupedBackground))
+                            .fill(Color("CardBG_2"))
                             .frame(height: 40.0)
                             .overlay {
                                 Toggle("Microphone required", isOn: $newRequest.mic)
                                     .padding(.horizontal)
+                                    .tint(.accentColor)
                             }
                             .padding(.horizontal)
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(UIColor.secondarySystemGroupedBackground))
+                            .fill(Color("CardBG_2"))
                             .frame(height: 40.0)
                             .overlay {
                                 Stepper("Players needed: \(newRequest.pnumber)", value: $newRequest.pnumber, in: 1...20, step: 1)
@@ -135,7 +136,7 @@ struct GameConfig: View {
                             .padding(.horizontal)
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(UIColor.secondarySystemGroupedBackground))
+                            .fill(Color("CardBG_2"))
                             .frame(height: 40.0)
                             .overlay {
                                 Stepper("Expiration time: \(newRequest.time) min", value: $newRequest.time, in: 5...120, step: 5)
@@ -144,7 +145,7 @@ struct GameConfig: View {
                             .padding(.horizontal)
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color(UIColor.secondarySystemGroupedBackground))
+                            .fill(Color("CardBG_2"))
                             .frame(height: 40.0)
                             .overlay {
                                 Button(action: {showModal.toggle()}) {
@@ -155,7 +156,7 @@ struct GameConfig: View {
                                         Spacer()
                                         
                                         Text(regions.first(where: {$1 == newRequest.region})?.key ?? "N/A")
-                                            .foregroundColor(.accentColor)
+                                            .foregroundColor(.primary)
                                         
                                         Image(newRequest.region)
                                             .resizable()

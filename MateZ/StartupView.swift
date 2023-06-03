@@ -16,7 +16,10 @@ struct StartupView: View {
         Group {
             
             if isLoading {
-                CustomProgress(withText: true)
+                ZStack {
+                    Color("BG").ignoresSafeArea()
+                    CustomProgress(withText: true)
+                }
             } else if !loggedIn {
                 Login(appData: appData, loggedIn: $loggedIn)
             } else {
@@ -24,7 +27,7 @@ struct StartupView: View {
                     
                     Dashboard(appData: appData)
                         .tabItem {
-                            Label("Dashboard", systemImage: "newspaper")
+                            Label("Lobbies", systemImage: "person.3")
                         }
                     
                     Profile(appData: appData, loggedIn: $loggedIn)
