@@ -39,7 +39,7 @@ struct RegionSelect: View {
                             } label: {
                                 HStack(spacing: 10) {
                                     RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color("CardBG_2"))
+                                        .fill(Color("CardBG"))
                                         .frame(height: 70)
                                         .overlay {
                                             HStack {

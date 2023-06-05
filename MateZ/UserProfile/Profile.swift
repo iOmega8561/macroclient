@@ -17,8 +17,6 @@ struct Profile: View {
     @State var showModal: Bool = false
     @State var error: Bool = false
     
-    let gradient: LinearGradient = LinearGradient(colors: [Color("CardBG_2"), Color("CardBG_1")], startPoint: .bottom, endPoint: .top)
-    
     var myRequests: [UserRequest] {
         let new = appData.requests.filter {
             $0.value.user_id == appData.authData.username
@@ -134,7 +132,7 @@ struct Profile: View {
                                                     .frame(width: 60, height: 60)
                                                     .padding()
                                             }
-                                            .background(gradient)
+                                            .background(Color("CardBG"))
                                             .clipShape(RoundedRectangle(cornerRadius: 10))
                                             .contextMenu {
                                                 Button(role: .destructive) {
@@ -157,11 +155,11 @@ struct Profile: View {
                             
                             Button(action: { logOutDialog.toggle() }) {
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color("CardBG_2"))
+                                    .fill(Color("CardBG"))
                                     .frame(height: 40.0)
                                     .overlay {
                                         Text("Log out")
-                                            .foregroundColor(.primary)
+                                            .foregroundColor(.red)
                                     }
                             }
                             .padding(.horizontal)

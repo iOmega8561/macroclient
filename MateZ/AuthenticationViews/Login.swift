@@ -50,12 +50,12 @@ struct Login: View {
                             .frame(height: 44)
                             .overlay {
                                 ZStack {
-                                    Color("CardBG_2")
+                                    Color("CardBG")
                                         .clipShape(RoundedRectangle(cornerRadius: 10))
                                     
                                     TextField("", text: $username)
                                         .frame(height: 44)
-                                        .background(Color("CardBG_2"))
+                                        .background(Color("CardBG"))
                                         .clipShape(RoundedRectangle(cornerRadius: 10))
                                         .font(.system(size: 20.0))
                                         .autocapitalization(.none)
@@ -79,12 +79,12 @@ struct Login: View {
                             .frame(height: 44)
                             .overlay {
                                 ZStack {
-                                    Color("CardBG_2")
+                                    Color("CardBG")
                                         .clipShape(RoundedRectangle(cornerRadius: 10))
                                     
                                     SecureField("", text: $password)
                                         .frame(height: 44)
-                                        .background(Color("CardBG_2"))
+                                        .background(Color("CardBG"))
                                         .clipShape(RoundedRectangle(cornerRadius: 10))
                                         .font(.system(size: 20.0))
                                         .autocapitalization(.none)
@@ -109,7 +109,7 @@ struct Login: View {
                             NavigationLink(destination: Signup(appData: appData)) {
                                 
                                 RoundedRectangle(cornerRadius: 10)
-                                    .fill(Color("CardBG_2"))
+                                    .fill(Color("CardBG"))
                                     .frame(width: 200, height: 50)
                                     .overlay(
                                         Text("Create an account"))

@@ -32,7 +32,7 @@ struct FavouritePicker: View {
                                     dismiss()
                                 } label: {
                                     RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color("CardBG_2"))
+                                        .fill(Color("CardBG"))
                                         .frame(height: 70)
                                         .overlay {
                                             HStack {

@@ -16,8 +16,6 @@ struct GameConfig: View {
     
     private let defPlats = ["XBOX", "PlayStation", "PC", "Android", "iOS", "Switch"]
     
-    let gradient: LinearGradient = LinearGradient(colors: [Color("CardBG_2"), Color("CardBG_1")], startPoint: .bottom, endPoint: .top)
-    
     var body: some View {
         ZStack {
             Color("BG")
@@ -36,7 +34,7 @@ struct GameConfig: View {
                             ForEach(defPlats, id: \.self) { plat in
                                 VStack {
                                     Button(action: {newRequest.plat = plat}) {
-                                        Image(plat)
+                                        Image(appData.games[newRequest.game]!.plat.contains(plat) ? plat:"\(plat)DIS")
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 45)
@@ -70,7 +68,7 @@ struct GameConfig: View {
                             }
                         }
                         .pickerStyle(.wheel)
-                        .background(gradient)
+                        .background(Color("CardBG"))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .padding(.horizontal)
                     }
@@ -90,7 +88,7 @@ struct GameConfig: View {
                                     } else { newRequest.skills.append(skill) }
                                 } label: {
                                     RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color("CardBG_2"))
+                                        .fill(Color("CardBG"))
                                         .frame(height: 40.0)
                                         .overlay {
                                             HStack {
@@ -117,7 +115,7 @@ struct GameConfig: View {
                             .padding(.horizontal)
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("CardBG_2"))
+                            .fill(Color("CardBG"))
                             .frame(height: 40.0)
                             .overlay {
                                 Toggle("Microphone required", isOn: $newRequest.mic)
@@ -127,7 +125,7 @@ struct GameConfig: View {
                             .padding(.horizontal)
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("CardBG_2"))
+                            .fill(Color("CardBG"))
                             .frame(height: 40.0)
                             .overlay {
                                 Stepper("Players needed: \(newRequest.pnumber)", value: $newRequest.pnumber, in: 1...20, step: 1)
@@ -136,7 +134,7 @@ struct GameConfig: View {
                             .padding(.horizontal)
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("CardBG_2"))
+                            .fill(Color("CardBG"))
                             .frame(height: 40.0)
                             .overlay {
                                 Stepper("Expiration time: \(newRequest.time) min", value: $newRequest.time, in: 5...120, step: 5)
@@ -145,7 +143,7 @@ struct GameConfig: View {
                             .padding(.horizontal)
                         
                         RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("CardBG_2"))
+                            .fill(Color("CardBG"))
                             .frame(height: 40.0)
                             .overlay {
                                 Button(action: {showModal.toggle()}) {

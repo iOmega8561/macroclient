@@ -13,8 +13,6 @@ struct UneditableProfile: View {
     
     @State var error: Bool = false
     
-    let gradient: LinearGradient = LinearGradient(colors: [Color("CardBG_2"), Color("CardBG_1")], startPoint: .bottom, endPoint: .top)
-    
     var theirRequests: [UserRequest] {
         let new = appData.requests.filter {
             $0.value.user_id == userProfile.username
@@ -84,7 +82,7 @@ struct UneditableProfile: View {
                                                 .frame(width: 60, height: 60)
                                                 .padding()
                                         }
-                                        .background(gradient)
+                                        .background(Color("CardBG"))
                                         .clipShape(RoundedRectangle(cornerRadius: 10))
                                     }
                                 }

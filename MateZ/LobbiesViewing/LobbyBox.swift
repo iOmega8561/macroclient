@@ -13,8 +13,6 @@ struct LobbyBox: View {
     let dateFormatter: DateFormatter
     var expireDate: Date
     
-    let gradient: LinearGradient = LinearGradient(colors: [Color("CardBG_2"), Color("CardBG_1")], startPoint: .bottom, endPoint: .top)
-    
     init(games: [String: Game], request: UserRequest) {
         self.games = games
         self.request = request
@@ -28,7 +26,7 @@ struct LobbyBox: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 10.0)
-            .fill(gradient)
+            .fill(Color("CardBG"))
             .overlay {
                 HStack {
                     RemoteImage(imgname: games[request.game]?.imgname ?? "game_generic", squareSize: 80)

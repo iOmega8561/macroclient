@@ -196,7 +196,7 @@ struct LobbyDetails: View {
                         }
                     }
                     .padding()
-                    .background(Color("CardBG_2"))
+                    .background(Color("CardBG"))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
                 }.padding(.horizontal)
             }
