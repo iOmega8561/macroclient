@@ -13,29 +13,36 @@ struct RemoteImage: View {
     var squareSize: CGFloat?
     
     var body: some View {
-        AsyncImage(url: URL(string: "\(baseUrl)/img?name=\(imgname)")) { phase in
-            switch phase {
-                
-            case .empty:
-                Spacer()
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle(tint: Color.accentColor))
-                Spacer()
-                
-            case .success(let image):
-                image
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: squareSize ?? 60)
-                
-            case .failure(_):
-                Spacer()
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundColor(.orange)
-                Spacer()
-                
-            @unknown default:
-                EmptyView()
+        if let myImage = UIImage(named: imgname) {
+            Image(imgname)
+                .resizable()
+                .scaledToFit()
+                .frame(width: squareSize ?? 60)
+        } else {
+            AsyncImage(url: URL(string: "\(baseUrl)/img?name=\(imgname)")) { phase in
+                switch phase {
+                    
+                case .empty:
+                    Spacer()
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle(tint: Color.accentColor))
+                    Spacer()
+                    
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: squareSize ?? 60)
+                    
+                case .failure(_):
+                    Spacer()
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundColor(.orange)
+                    Spacer()
+                    
+                @unknown default:
+                    EmptyView()
+                }
             }
         }
     }
