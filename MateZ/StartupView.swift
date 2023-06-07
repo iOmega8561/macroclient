@@ -50,6 +50,10 @@ struct StartupView: View {
                         .tabItem{
                             Label("Profile", systemImage: "person")
                         }
+                    ChatScreen()
+                        .tabItem{
+                        Label("Chat", systemImage: "message")
+                    }
                 }
             }
             

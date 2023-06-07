@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DDF7DA2C2A30AB6D00AE5393 /* ChatScreenWithModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7DA2B2A30AB6D00AE5393 /* ChatScreenWithModels.swift */; };
+		DDF7DA312A30ACCE00AE5393 /* ChatMessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7DA302A30ACCE00AE5393 /* ChatMessageModel.swift */; };
 		E317A2612A1FA5520007833E /* FavouritePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E317A2602A1FA5520007833E /* FavouritePicker.swift */; };
 		E31CD9182A1662FE00C7C8CC /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31CD9172A1662FE00C7C8CC /* Signup.swift */; };
 		E31CD91A2A16638100C7C8CC /* LobbyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31CD9192A16638100C7C8CC /* LobbyDetails.swift */; };
@@ -38,6 +40,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DDF7DA2B2A30AB6D00AE5393 /* ChatScreenWithModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreenWithModels.swift; sourceTree = "<group>"; };
+		DDF7DA2D2A30ABAF00AE5393 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DDF7DA302A30ACCE00AE5393 /* ChatMessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageModel.swift; sourceTree = "<group>"; };
 		E317A2602A1FA5520007833E /* FavouritePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePicker.swift; sourceTree = "<group>"; };
 		E31CD9172A1662FE00C7C8CC /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
 		E31CD9192A16638100C7C8CC /* LobbyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LobbyDetails.swift; sourceTree = "<group>"; };
@@ -80,6 +85,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DDF7DA2A2A30AB4600AE5393 /* Chat  */ = {
+			isa = PBXGroup;
+			children = (
+				DDF7DA2B2A30AB6D00AE5393 /* ChatScreenWithModels.swift */,
+			);
+			path = "Chat ";
+			sourceTree = "<group>";
+		};
+		DDF7DA2F2A30ACB700AE5393 /* ChatMessageModel */ = {
+			isa = PBXGroup;
+			children = (
+				DDF7DA302A30ACCE00AE5393 /* ChatMessageModel.swift */,
+			);
+			path = ChatMessageModel;
+			sourceTree = "<group>";
+		};
 		E3371F9829F8438800A5F810 = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +120,7 @@
 		E3371FA329F8438800A5F810 /* MateZ */ = {
 			isa = PBXGroup;
 			children = (
+				DDF7DA2D2A30ABAF00AE5393 /* Info.plist */,
 				E3371FA429F8438800A5F810 /* App.swift */,
 				E31CD91B2A167FDB00C7C8CC /* StartupView.swift */,
 				E37914222A30B8CF001343D4 /* DummyView.swift */,
@@ -130,6 +152,8 @@
 				E3371FB329F844B400A5F810 /* WebAPI.swift */,
 				E3371FB529F846FB00A5F810 /* Model.swift */,
 				E33AAF412A2792B700034A0C /* Regions.swift */,
+				DDF7DA2A2A30AB4600AE5393 /* Chat  */,
+				DDF7DA2F2A30ACB700AE5393 /* ChatMessageModel */,
 			);
 			path = DataHandling;
 			sourceTree = "<group>";
@@ -270,6 +294,7 @@
 				E3D1404B2A2B3858004A16B3 /* LobbyBox.swift in Sources */,
 				E3B151FB2A0BE98700907396 /* GameSelection.swift in Sources */,
 				E317A2612A1FA5520007833E /* FavouritePicker.swift in Sources */,
+				DDF7DA312A30ACCE00AE5393 /* ChatMessageModel.swift in Sources */,
 				E3BFC15D29FD496C0025609E /* AppData.swift in Sources */,
 				E36393AA2A2E19AE005EAD9F /* AvatarSelection.swift in Sources */,
 				E36393AF2A2E19D6005EAD9F /* GamesSelection.swift in Sources */,
@@ -291,6 +316,7 @@
 				E33AAF422A2792B700034A0C /* Regions.swift in Sources */,
 				E3B151F82A0BE37400907396 /* GameConfig.swift in Sources */,
 				E3371FB629F846FB00A5F810 /* Model.swift in Sources */,
+				DDF7DA2C2A30AB6D00AE5393 /* ChatScreenWithModels.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,9 +445,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MateZ/Preview Content\"";
-				DEVELOPMENT_TEAM = T8HX5554JX;
+				DEVELOPMENT_TEAM = TR7QYD9K6M;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MateZ/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -433,7 +460,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.giuseppe.iOSwebtest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.aryan.matez;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -455,6 +482,7 @@
 				DEVELOPMENT_TEAM = T8HX5554JX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = MateZ/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
