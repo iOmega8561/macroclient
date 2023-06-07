@@ -36,6 +36,16 @@ struct StartupView: View {
                             Label("Lobbies", systemImage: "person.3")
                         }
                     
+                    DummyView()
+                        .tabItem {
+                            Label("Requests", systemImage: "personalhotspot")
+                        }
+                    
+                    DummyView()
+                        .tabItem {
+                            Label("Messages", systemImage: "bubble.left")
+                        }
+                    
                     Profile(appData: appData, loggedIn: $loggedIn)
                         .tabItem{
                             Label("Profile", systemImage: "person")

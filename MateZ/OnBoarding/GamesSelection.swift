@@ -17,53 +17,46 @@ struct GamesSelection: View {
         ZStack {
             Color("BG").ignoresSafeArea()
             
-            VStack(alignment: .leading) {
-                Text("SELECT YOUR GAMES")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal)
-                
-                ScrollView {
-                    LazyVStack {
-                        ForEach(searchResults, id: \.self) { game in
-                            Button {
-                                if appData.localProfile.fgames.contains(game) {
-                                    if let idx = appData.localProfile.fgames.firstIndex(of: game) {
-                                        
-                                        appData.localProfile.fgames.remove(at: idx)
+            ScrollView {
+                LazyVStack {
+                    ForEach(searchResults, id: \.self) { game in
+                        Button {
+                            if appData.localProfile.fgames.contains(game) {
+                                if let idx = appData.localProfile.fgames.firstIndex(of: game) {
+                                    
+                                    appData.localProfile.fgames.remove(at: idx)
+                                }
+                            } else {
+                                appData.localProfile.fgames.append(game)
+                            }
+                        } label: {
+                            HStack {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color("CardBG"))
+                                    .frame(height: 50)
+                                    .overlay {
+                                        HStack {
+                                            RemoteImage(imgname: appData.games[game]!.imgname, squareSize: 40)
+                                                .frame(width: 40, height: 40)
+                                                .padding(.trailing)
+                                            
+                                            Text(game)
+                                                .font(.system(size: 17))
+                                                .foregroundColor(.primary)
+                                            Spacer()
+                                            
+                                            if appData.localProfile.fgames.contains(game) {
+                                                Image(systemName: "checkmark")
+                                            }
+                                        }.padding(.horizontal)
                                     }
-                                } else {
-                                    appData.localProfile.fgames.append(game)
-                                }
-                            } label: {
-                                HStack {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color("CardBG"))
-                                        .frame(height: 70)
-                                        .overlay {
-                                            HStack {
-                                                RemoteImage(imgname: appData.games[game]!.imgname, squareSize: 55)
-                                                    .frame(width: 55, height: 55)
-                                                    .padding(.trailing)
-                                                
-                                                Text(game)
-                                                    .font(.system(size: 20))
-                                                    .foregroundColor(.primary)
-                                                Spacer()
-                                                
-                                                if appData.localProfile.fgames.contains(game) {
-                                                    Image(systemName: "checkmark")
-                                                }
-                                            }.padding(.horizontal)
-                                        }
-                                }
                             }
                         }
-                    }.padding(.horizontal)
-                }
-                .searchable(text: $searchText)
+                    }
+                }.padding(.horizontal)
             }
-            .navigationTitle("Games")
+            .searchable(text: $searchText)
+            .navigationTitle("Select your games")
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button {

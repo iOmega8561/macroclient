@@ -21,16 +21,11 @@ struct AvatarSelection: View {
         ZStack {
             Color("BG").ignoresSafeArea()
             
-            VStack(alignment: .leading) {
-                Text("CHOOSE YOUR AVATAR")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal)
-                
-                GeometryReader { proxy in
-                    ScrollView {
-                        LazyVGrid(columns: gridItemLayout, spacing: 10) {
-                            ForEach(0..<6) { i in
+            GeometryReader { proxy in
+                ScrollView {
+                    VStack(alignment: .leading) {
+                        LazyVGrid(columns: gridItemLayout, spacing: 3) {
+                            ForEach(0..<15) { i in
                                 Button {
                                     selection = i
                                     appData.localProfile.avatar = "user\(i)"
@@ -51,10 +46,11 @@ struct AvatarSelection: View {
                             }
                         }
                     }
-                }.padding(.horizontal)
-            }
+                }
+            }.padding(.horizontal)
         }
-        .navigationTitle("Avatar")
+        .navigationTitle("Select your avatar")
+        .navigationBarTitleDisplayMode(.large)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
@@ -67,7 +63,7 @@ struct AvatarSelection: View {
                     NavigationLink(destination: RegionSelection(appData: appData), isActive: $navigationActive) {EmptyView() }
                     
                     HStack {
-                        Text("Region")
+                        Text("Next")
                         Image(systemName: "chevron.right")
                     }
                     

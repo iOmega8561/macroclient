@@ -18,6 +18,8 @@ struct Profile: View {
     @State var error: Bool = false
     @State var error2: Bool = false
     
+    private let gridItemLayout = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    
     var myRequests: [UserRequest] {
         let new = appData.requests.filter {
             $0.value.user_id == appData.authData.username
@@ -34,35 +36,53 @@ struct Profile: View {
                     
                     ScrollView {
                         VStack {
-                            HStack {
-                                Spacer()
-                                VStack {
-                                    ZStack(alignment: .bottomTrailing) {
-                                        RemoteImage(imgname: appData.localProfile.avatar, squareSize: 130)
-                                            .clipShape(Circle())
-                                            .frame(width: 130, height: 130)
+                            HStack(alignment: .center) {
+                                
+                                VStack(alignment: .center) {
+                                    RemoteImage(imgname: appData.localProfile.avatar, squareSize: 100)
+                                        .clipShape(RoundedRectangle(cornerRadius: 15))
+                                        .frame(width: 100, height: 100)
+                                    
+                                    Button(action: {avatarPicker = true}) {
                                         
-                                        Button(action: {avatarPicker = true}) {
-                                            Image(systemName: "pencil.circle.fill")
+                                        Text("Edit Avatar")
+                                            .font(.system(size: 12, weight: .semibold))
+                                        
+                                    }.sheet(isPresented: $avatarPicker) {
+                                        AvatarPicker(appData: appData)
+                                    }
+                                }
+                                
+                                VStack(alignment: .leading) {
+                                    Text(appData.localProfile.username)
+                                        .font(.system(size: 25))
+                                        
+                                    HStack {
+                                        ZStack {
+                                            RoundedRectangle(cornerRadius: 2)
+                                                .fill(Color("BDisabled"))
+                                                .frame(width: 26,height: 20)
+                                            
+                                            Image(appData.localProfile.region)
                                                 .resizable()
                                                 .scaledToFit()
-                                                .frame(width: 30)
-                                                .padding(.horizontal)
-                                        }.sheet(isPresented: $avatarPicker) {
-                                            AvatarPicker(appData: appData)
+                                                .frame(width: 21)
                                         }
+                                        
+                                        Text(appData.localProfile.region.uppercased())
+                                            .font(.system(size: 18))
                                     }
                                     
-                                    Text(appData.localProfile.username)
-                                        .font(.title)
                                 }
+                                .padding([.horizontal, .bottom])
+                                
                                 Spacer()
-                            }
+                            }.padding([.horizontal, .top])
                             
                             VStack(alignment: .leading) {
-                                Text("YOUR REQUESTS")
-                                    .font(.headline)
-                                    .foregroundColor(.secondary)
+                                Text("Your requests")
+                                    .font(.title2)
+                                    .foregroundColor(.primary)
                                     .padding(.horizontal)
                                 
                                 ScrollView(.horizontal, showsIndicators: false) {
@@ -98,9 +118,9 @@ struct Profile: View {
                             
                             VStack(alignment: .leading) {
                                 HStack {
-                                    Text("FAVOURITE GAMES")
-                                        .font(.headline)
-                                        .foregroundColor(.secondary)
+                                    Text("Favourite games")
+                                        .font(.title2)
+                                        .foregroundColor(.primary)
                                     .padding(.horizontal)
                                     
                                     Spacer()
@@ -113,6 +133,8 @@ struct Profile: View {
                                         }
                                     } label: {
                                         Image(systemName: "plus")
+                                            .renderingMode(.template)
+                                            .foregroundColor(.primary)
                                     }
                                     .foregroundColor(.secondary)
                                     .sheet(isPresented: $showModal) {
@@ -125,36 +147,35 @@ struct Profile: View {
                                     
                                 }.padding(.trailing)
                                 
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    LazyHStack {
-                                        ForEach(appData.localProfile.fgames, id: \.self) { g in
-                                            VStack {
-                                                RemoteImage(imgname: appData.games[g]?.imgname ?? "game_default")
-                                                    .frame(width: 60, height: 60)
-                                                    .padding()
-                                            }
-                                            .background(Color("CardBG"))
-                                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                                            .contextMenu {
-                                                Button(role: .destructive) {
-                                                    Task {
-                                                        if appData.localProfile.fgames.count > 1 { if let idx = appData.localProfile.fgames.firstIndex(of: g) {
-                                                            
-                                                            appData.localProfile.fgames.remove(at: idx)
-                                                            await appData.updateUser()
-                                                        }
-                                                        } else {
-                                                            error2.toggle()
-                                                        }
+                                
+                                LazyVGrid(columns: gridItemLayout, spacing: 10) {
+                                    ForEach(appData.localProfile.fgames, id: \.self) { g in
+                                        VStack {
+                                            RemoteImage(imgname: appData.games[g]?.imgname ?? "game_default", squareSize: 70)
+                                                .frame(width: 80, height: 80)
+                                                .padding()
+                                        }
+                                        .background(Color("CardBG"))
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                        .contextMenu {
+                                            Button(role: .destructive) {
+                                                Task {
+                                                    if appData.localProfile.fgames.count > 1 { if let idx = appData.localProfile.fgames.firstIndex(of: g) {
+                                                        
+                                                        appData.localProfile.fgames.remove(at: idx)
+                                                        await appData.updateUser()
                                                     }
-                                                } label: {
-                                                    Label("Delete game", systemImage: "x.circle")
+                                                    } else {
+                                                        error2.toggle()
+                                                    }
                                                 }
-                                                
+                                            } label: {
+                                                Label("Delete game", systemImage: "x.circle")
                                             }
-                                            .alert("You need at least one game!", isPresented: $error2) {
-                                                Button("OK", role: .cancel) { }
-                                            }
+                                            
+                                        }
+                                        .alert("You need at least one game!", isPresented: $error2) {
+                                            Button("OK", role: .cancel) { }
                                         }
                                     }
                                 }
@@ -183,9 +204,10 @@ struct Profile: View {
                                 }
                             }
                         }
-                    }.padding(.top)
+                    }
                 }
             }
+            .navigationTitle("Profile")
         }.navigationViewStyle(.stack)
     }
 }

@@ -30,51 +30,47 @@ struct RegionSelection: View {
     var body: some View {
         ZStack {
             Color("BG").ignoresSafeArea()
-            
-            VStack(alignment: .leading) {
-                Text("SELECT YOUR REGION")
-                    .font(.headline)
-                    .foregroundColor(.secondary)
-                    .padding(.horizontal)
-                
-                ScrollView {
-                    LazyVStack {
-                        ForEach(searchResults, id: \.self) { region in
-                            Button {
-                                appData.localProfile.region = regions[region] ?? "n/a"
-                            } label: {
-                                HStack(spacing: 10) {
-                                    RoundedRectangle(cornerRadius: 10)
-                                        .fill(Color("CardBG"))
-                                        .frame(height: 70)
-                                        .overlay {
-                                            HStack {
-                                                Image(regions[region]!)
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 55)
-                                                    .padding(.trailing)
-                                                
-                                                Text(region)
-                                                    .lineLimit(1)
-                                                    .font(.system(size: 20))
-                                                    .foregroundColor(.primary)
-                                                Spacer()
-                                                
-                                                if appData.localProfile.region == regions[region] ?? "na" {
-                                                    Image(systemName: "checkmark")
-                                                }
-                                            }.padding(.horizontal)
-                                        }
-                                }
+               
+            ScrollView {
+                LazyVStack(alignment: .leading) {
+                    
+                    ForEach(searchResults, id: \.self) { region in
+                        Button {
+                            appData.localProfile.region = regions[region] ?? "n/a"
+                        } label: {
+                            HStack(spacing: 10) {
+                                RoundedRectangle(cornerRadius: 10)
+                                    .fill(Color("CardBG"))
+                                    .frame(height: 50)
+                                    .overlay {
+                                        HStack {
+                                            Image(regions[region]!)
+                                                .resizable()
+                                                .scaledToFit()
+                                                .frame(width: 40)
+                                                .padding(.trailing)
+                                            
+                                            Text(region)
+                                                .lineLimit(1)
+                                                .font(.system(size: 17))
+                                                .foregroundColor(.primary)
+                                            Spacer()
+                                            
+                                            if appData.localProfile.region == regions[region] ?? "na" {
+                                                Image(systemName: "checkmark")
+                                            }
+                                        }.padding(.horizontal)
+                                    }
                             }
                         }
-                    }.padding(.horizontal)
+                    }
                 }
+                .padding(.horizontal)
                 .searchable(text: $searchText)
             }
-            .navigationTitle("Region")
+            .navigationTitle("Select your country")
             .toolbar {
+                
                 ToolbarItem(placement: .navigationBarTrailing) {
                     
                     Button {
@@ -87,12 +83,12 @@ struct RegionSelection: View {
                         NavigationLink(destination: GamesSelection(appData: appData), isActive: $navigationActive) {EmptyView() }
                         
                             HStack {
-                                Text("Games")
+                                Text("Next")
                                 Image(systemName: "chevron.right")
                             }
                         
                     }
-                    .alert("Select your region", isPresented: $showError) {
+                    .alert("Select your country", isPresented: $showError) {
                         Button("OK", role: .cancel) { }
                     }
                 }

@@ -24,9 +24,9 @@ struct GameConfig: View {
             ScrollView {
                 VStack(spacing: 30) {
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("PLATFORM")
-                            .font(.headline)
-                            .foregroundColor(.secondary)
+                        Text("Platform")
+                            .font(.title2)
+                            .foregroundColor(.primary)
                             .padding(.horizontal)
                         
                         HStack {
@@ -57,9 +57,9 @@ struct GameConfig: View {
                     
                     VStack(alignment: .leading, spacing: 5) {
                         
-                        Text("GAME MODE")
-                            .font(.headline)
-                            .foregroundColor(.secondary)
+                        Text("Game mode")
+                            .font(.title2)
+                            .foregroundColor(.primary)
                             .padding(.horizontal)
                         
                         Picker("Gamemodes", selection: $newRequest.mode) {
@@ -75,9 +75,9 @@ struct GameConfig: View {
                     
                     if appData.games[newRequest.game]!.skills.count > 0 {
                         VStack(alignment: .leading, spacing: 5) {
-                            Text("GAME ROLES")
-                                .font(.headline)
-                                .foregroundColor(.secondary)
+                            Text("Game roles")
+                                .font(.title2)
+                                .foregroundColor(.primary)
                                 .padding(.horizontal)
                             
                             ForEach(appData.games[newRequest.game]!.skills, id: \.self) { skill in
@@ -109,9 +109,9 @@ struct GameConfig: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 5) {
-                        Text("OTHER DETAILS")
-                            .font(.headline)
-                            .foregroundColor(.secondary)
+                        Text("Other details")
+                            .font(.title2)
+                            .foregroundColor(.primary)
                             .padding(.horizontal)
                         
                         RoundedRectangle(cornerRadius: 10)

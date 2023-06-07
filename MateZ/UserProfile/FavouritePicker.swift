@@ -33,15 +33,15 @@ struct FavouritePicker: View {
                                 } label: {
                                     RoundedRectangle(cornerRadius: 10)
                                         .fill(Color("CardBG"))
-                                        .frame(height: 70)
+                                        .frame(height: 50)
                                         .overlay {
                                             HStack {
-                                                RemoteImage(imgname: appData.games[game]!.imgname, squareSize: 55)
-                                                    .frame(width: 55, height: 55)
+                                                RemoteImage(imgname: appData.games[game]!.imgname, squareSize: 40)
+                                                    .frame(width: 40, height: 40)
                                                     .padding(.trailing)
                                                 
                                                 Text(game)
-                                                    .font(.system(size: 20))
+                                                    .font(.system(size: 17))
                                                     .foregroundColor(.primary)
                                                 Spacer()
                                                 Image(systemName: "plus")

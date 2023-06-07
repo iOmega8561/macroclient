@@ -13,6 +13,8 @@ struct UneditableProfile: View {
     
     @State var error: Bool = false
     
+    private let gridItemLayout = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    
     var theirRequests: [UserRequest] {
         let new = appData.requests.filter {
             $0.value.user_id == userProfile.username
@@ -28,24 +30,44 @@ struct UneditableProfile: View {
                 
                 ScrollView {
                     VStack {
-                        HStack {
-                            Spacer()
-                            VStack {
-                                
-                                RemoteImage(imgname: userProfile.avatar, squareSize: 130)
-                                    .clipShape(Circle())
-                                    .frame(width: 130, height: 130)
-                                
+                        HStack(alignment: .center) {
+                            
+                            
+                            RemoteImage(imgname: userProfile.avatar, squareSize: 100)
+                                .clipShape(RoundedRectangle(cornerRadius: 15))
+                                .frame(width: 100, height: 100)
+                            
+                            VStack(alignment: .leading) {
                                 Text(userProfile.username)
-                                    .font(.title)
+                                    .font(.system(size: 25))
+                                
+                                HStack {
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .fill(Color("BDisabled"))
+                                            .frame(width: 26,height: 20)
+                                        
+                                        Image(userProfile.region)
+                                            .resizable()
+                                            .scaledToFit()
+                                            .frame(width: 21)
+                                    }
+                                    
+                                    Text(userProfile.region.uppercased())
+                                        .font(.system(size: 18))
+                                }
+                                
                             }
+                            .padding([.horizontal, .bottom])
+                            
                             Spacer()
                         }
+                        .padding([.horizontal, .top])
                         
                         VStack(alignment: .leading) {
-                            Text("THEIR REQUESTS")
-                                .font(.headline)
-                                .foregroundColor(.secondary)
+                            Text("Their requests")
+                                .font(.title2)
+                                .foregroundColor(.primary)
                                 .padding(.horizontal)
                             
                             ScrollView(.horizontal, showsIndicators: false) {
@@ -65,26 +87,24 @@ struct UneditableProfile: View {
                         
                         VStack(alignment: .leading) {
                             HStack {
-                                Text("FAVOURITE GAMES")
-                                    .font(.headline)
-                                    .foregroundColor(.secondary)
+                                Text("Favoirite games")
+                                    .font(.title2)
+                                    .foregroundColor(.primary)
                                     .padding(.horizontal)
                                 
                                 Spacer()
                             }
                             .padding(.trailing)
                             
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                LazyHStack {
-                                    ForEach(userProfile.fgames, id: \.self) { g in
-                                        VStack {
-                                            RemoteImage(imgname: appData.games[g]?.imgname ?? "game_default")
-                                                .frame(width: 60, height: 60)
-                                                .padding()
-                                        }
-                                        .background(Color("CardBG"))
-                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                            LazyVGrid(columns: gridItemLayout, spacing: 10) {
+                                ForEach(userProfile.fgames, id: \.self) { g in
+                                    VStack {
+                                        RemoteImage(imgname: appData.games[g]?.imgname ?? "game_default", squareSize: 70)
+                                            .frame(width: 80, height: 80)
+                                            .padding()
                                     }
+                                    .background(Color("CardBG"))
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
                                 }
                             }
                             .padding(.horizontal)

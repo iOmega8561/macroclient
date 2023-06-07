@@ -51,10 +51,10 @@ struct LobbyDetails: View {
                         NavigationLink(destination: UneditableProfile(appData: appData, userProfile: creatorData)) {
                             VStack(alignment: .center) {
                                 RemoteImage(imgname: creatorData.avatar, squareSize: 110)
-                                    .clipShape(Circle())
+                                    .clipShape(RoundedRectangle(cornerRadius: 15))
                                 
                                 Text(creatorData.username)
-                                    .font(.system(size: 25, weight: .semibold))
+                                    .font(.system(size: 22, weight: .semibold))
                                     .lineLimit(1)
                             }
                         }
@@ -198,7 +198,7 @@ struct LobbyDetails: View {
                     .padding()
                     .background(Color("CardBG"))
                     .clipShape(RoundedRectangle(cornerRadius: 10))
-                }.padding(.horizontal)
+                }.padding([.horizontal, .top])
             }
             .navigationTitle("Lobby details")
             .task {

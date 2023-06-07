@@ -21,29 +21,34 @@ struct AvatarPicker: View {
             ZStack {
                 Color("BG").ignoresSafeArea()
                 
-                GeometryReader { proxy in
-                    ScrollView {
-                        LazyVGrid(columns: gridItemLayout, spacing: 10) {
-                            ForEach(0..<6) { i in
-                                Button(action: { selection = i }) {
-                                    ZStack(alignment: .bottomTrailing) {
-                                        RemoteImage(imgname: "user\(i)", squareSize: proxy.size.width / 3)
-                                        
-                                        if selection == i {
-                                            Image(systemName: "checkmark.circle.fill")
-                                                .resizable()
-                                                .scaledToFit()
-                                                .frame(width: 30)
-                                                .padding()
-                                                .foregroundColor(.accentColor)
+                Group {
+                    GeometryReader { proxy in
+                        ScrollView {
+                            Spacer().frame(height: 20)
+                            
+                            LazyVGrid(columns: gridItemLayout, spacing: 3) {
+                                ForEach(0..<15) { i in
+                                    Button(action: { selection = i }) {
+                                        ZStack(alignment: .bottomTrailing) {
+                                            RemoteImage(imgname: "user\(i)", squareSize: proxy.size.width / 3)
+                                            
+                                            if selection == i {
+                                                Image(systemName: "checkmark.circle.fill")
+                                                    .resizable()
+                                                    .scaledToFit()
+                                                    .frame(width: 30)
+                                                    .padding()
+                                                    .foregroundColor(.accentColor)
+                                            }
                                         }
                                     }
                                 }
                             }
                         }
                     }
-                }
+                }.padding(.horizontal)
             }
+            
             .navigationTitle("Choose your avatar")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

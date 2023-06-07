@@ -29,8 +29,8 @@ struct LobbyBox: View {
             .fill(Color("CardBG"))
             .overlay {
                 HStack {
-                    RemoteImage(imgname: games[request.game]?.imgname ?? "game_generic", squareSize: 80)
-                        .frame(width: 80.0, height: 80.0)
+                    RemoteImage(imgname: games[request.game]?.imgname ?? "game_generic", squareSize: 70)
+                        .frame(width: 70.0, height: 70.0)
                         .shadow(radius: 4.0)
                         .padding(.trailing)
                     
@@ -39,7 +39,7 @@ struct LobbyBox: View {
                         HStack {
                             Text(request.game)
                                 .lineLimit(1)
-                                .font(.system(size: 23, weight: .semibold))
+                                .font(.system(size: 17, weight: .semibold))
                             
                             Spacer()
                             
@@ -77,7 +77,7 @@ struct LobbyBox: View {
                                 }
                                 
                                 Text(request.region.uppercased())
-                                    .font(.system(size: 18))
+                                    .font(.system(size: 17))
                             }
                             
                             Spacer()
@@ -88,6 +88,7 @@ struct LobbyBox: View {
                                     .frame(width: 15)
                                 
                                 Text(request.mic ? "On":"Off")
+                                    .font(.system(size: 17))
                             }
                             Spacer()
                             HStack {
@@ -97,6 +98,7 @@ struct LobbyBox: View {
                                     .frame(width: 28)
                                 
                                 Text("\(request.pnumber)")
+                                    .font(.system(size: 17))
                             }
                             //Spacer()
                         }
