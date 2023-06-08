@@ -153,21 +153,13 @@ struct Login: View {
         } else {
             usernameError = false; passError = false; asyncError = false
             
-            if let data = await appData.getProfile(username: appData.authData.username) {
-                appData.localProfile = data
-                
-                if appData.localProfile.avatar != "user_generic" && appData.localProfile.fgames.count != 0 && appData.localProfile.region != "n_a" {
-                    appData.getStartedDone = true
-                }
-                
-                do {
-                    try await appData.save()
-                } catch { print("Error saving authData") }
-                
-                
-                
-                loggedIn = true
-            }
+            await appData.refreshProfile()
+            
+            do {
+                try await appData.save()
+            } catch { print("Error saving authData") }
+            
+            loggedIn = true
         }
         
         isLoading = false

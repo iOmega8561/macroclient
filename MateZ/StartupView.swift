@@ -11,7 +11,6 @@ struct StartupView: View {
     @StateObject var appData: AppData
     @State var isLoading: Bool = true
     @State var loggedIn: Bool = false
-    @State var showOnboarding: Bool = true
     
     var body: some View {
         Group {
@@ -25,10 +24,10 @@ struct StartupView: View {
             } else if !loggedIn {
                 GetStarted(appData: appData, loggedIn: $loggedIn)
                 
-            } else if loggedIn && showOnboarding {
+            } else if loggedIn && !appData.getStartedDone {
                 InitialConfig(appData: appData)
                 
-            } else if loggedIn {
+            } else if loggedIn && appData.getStartedDone {
                 TabView {
                     
                     Dashboard(appData: appData)
@@ -41,43 +40,35 @@ struct StartupView: View {
                             Label("Requests", systemImage: "personalhotspot")
                         }
                     
-                    DummyView()
-                        .tabItem {
+                    ChatScreen()
+                        .tabItem{
                             Label("Messages", systemImage: "bubble.left")
                         }
                     
                     Profile(appData: appData, loggedIn: $loggedIn)
+                        .onAppear {
+                            Task {
+                                await appData.refreshProfile()
+                            }
+                        }
                         .tabItem{
                             Label("Profile", systemImage: "person")
                         }
-                    ChatScreen()
-                        .tabItem{
-                        Label("Chat", systemImage: "message")
-                    }
+                   
                 }
             }
-            
-        }
-        .onChange(of: appData.getStartedDone) { value in
-            showOnboarding = !value
         }
         .task {
             do {
                 try await appData.load()
                 
-                if appData.authData.token != "na" && appData.authData.token != "na" {
+                if appData.authData.username != "na" && appData.authData.token != "na" {
                     let response = await appData.lastsession()
                     
                     if response == "Success" {
-                        if let data = await appData.getProfile(username: appData.authData.username) {
-                            appData.localProfile = data
-                            
-                            if appData.localProfile.avatar != "user_generic" && appData.localProfile.fgames.count != 0 && appData.localProfile.region != "n_a" {
-                                appData.getStartedDone = true
-                            }
-                            
-                            loggedIn = true
-                        }
+                        await appData.refreshProfile()
+                        
+                        loggedIn = true
                     }
                 }
                 

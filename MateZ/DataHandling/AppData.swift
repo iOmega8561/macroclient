@@ -68,9 +68,34 @@ class AppData: ObservableObject {
         }
     }
     
+    func updateAuthData(username: String, token: String) async {
+        self.objectWillChange.send()
+        
+        authData.token = token
+        authData.username = username
+        
+        do {
+            try await save()
+        } catch { print("Error saving authData") }
+    }
+    
+    func refreshProfile() async {
+        do {
+            self.objectWillChange.send()
+            localProfile = try await webAPI.getProfile(username: authData.username)
+            
+            if localProfile.avatar != "user_generic" && localProfile.fgames.count != 0 && localProfile.region != "n_a" {
+                getStartedDone = true
+            }
+        } catch {
+            print("Error retrieving self profile \(String(describing: error))")
+        }
+    }
+    
     func logout() async {
         do {
             let _ = try await webAPI.logout(username: authData.username)
+            self.objectWillChange.send()
             authData.token = "na"; authData.username = "na"
         } catch {
             print("Error loggin user out \(String(describing: error))")
@@ -91,6 +116,8 @@ class AppData: ObservableObject {
             let response = try await webAPI.signin(username: username, password: password)
             
             if !response.contains("Invalid") {
+                
+                self.objectWillChange.send()
                 authData.token = response; authData.username = username
             }
             
@@ -133,7 +160,10 @@ class AppData: ObservableObject {
     func fetchUserRequests() async -> Bool {
         do {
             let tmp: [String: UserRequest] = try await webAPI.requests()
+            
+            self.objectWillChange.send()
             requests = tmp
+            
             return true
         } catch {
             print("Error fetching user requests \(String(describing: error))")
@@ -145,6 +175,8 @@ class AppData: ObservableObject {
     func fetchRemoteGames() async {
         do {
             let tmp: [String: Game] = try await webAPI.games()
+            
+            self.objectWillChange.send()
             games = tmp
         } catch {
             print("Error fetching remote games \(String(describing: error))")

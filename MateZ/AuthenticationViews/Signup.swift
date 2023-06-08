@@ -189,13 +189,7 @@ struct Signup: View {
         } else {
             usernameError = false; passError = false; asyncError = false; pass2Error = false; usernameTaken = false
             
-            appData.localProfile.username = username
-            appData.authData.username = username
-            appData.authData.token = response
-            
-            do {
-                try await appData.save()
-            } catch { print("Error saving authData") }
+            await appData.updateAuthData(username: username, token: response)
             
             flyToGetStarted = true
         }
