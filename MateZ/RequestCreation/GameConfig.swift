@@ -112,72 +112,72 @@ struct GameConfig: View {
                         Text("Other details")
                             .font(.title2)
                             .foregroundColor(.primary)
-                            .padding(.horizontal)
+                            
                         
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("CardBG"))
-                            .frame(height: 40.0)
-                            .overlay {
-                                Toggle("Microphone required", isOn: $newRequest.mic)
-                                    .padding(.horizontal)
-                                    .tint(.accentColor)
-                            }
-                            .padding(.horizontal)
-                        
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("CardBG"))
-                            .frame(height: 40.0)
-                            .overlay {
-                                Stepper("Players needed: \(newRequest.pnumber)", value: $newRequest.pnumber, in: 1...20, step: 1)
-                                    .padding(.horizontal)
-                            }
-                            .padding(.horizontal)
-                        
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("CardBG"))
-                            .frame(height: 40.0)
-                            .overlay {
-                                Stepper("Expiration time: \(newRequest.time) min", value: $newRequest.time, in: 5...120, step: 5)
-                                    .padding(.horizontal)
-                            }
-                            .padding(.horizontal)
-                        
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(Color("CardBG"))
-                            .frame(height: 40.0)
-                            .overlay {
-                                Button(action: {showModal.toggle()}) {
-                                    HStack {
-                                        Text("Region")
-                                            .foregroundColor(.primary)
-                                        
-                                        Spacer()
-                                        
-                                        Text(regions.first(where: {$1 == newRequest.region})?.key ?? "N/A")
-                                            .foregroundColor(.primary)
+                        VStack(alignment: .leading, spacing: 5) {
+                            
+                            
+                            Toggle("Microphone required", isOn: $newRequest.mic)
+                                .tint(.accentColor)
+                                .padding(.bottom, 5)
+                            
+                            Divider()
+                                .background(.primary)
+                            
+                            Stepper("Players needed: \(newRequest.pnumber)", value: $newRequest.pnumber, in: 1...20, step: 1)
+                                .frame(height: 40)
+                            
+                            Divider()
+                                .background(.primary)
+                            
+                            Stepper("Expiration time: \(newRequest.time) min", value: $newRequest.time, in: 5...120, step: 5)
+                                .frame(height: 40)
+                            
+                            Divider()
+                                .background(.primary)
+                            
+                            Button(action: {showModal.toggle()}) {
+                                HStack {
+                                    Text("Region")
+                                        .foregroundColor(.primary)
+                                    
+                                    Spacer()
+                                    
+                                    Text(regions.first(where: {$1 == newRequest.region})?.key ?? "N/A")
+                                        .foregroundColor(.primary)
+                                    
+                                    ZStack {
+                                        RoundedRectangle(cornerRadius: 2)
+                                            .fill(Color("BDisabled"))
+                                            .frame(width: 29,height: 22)
                                         
                                         Image(newRequest.region)
                                             .resizable()
                                             .scaledToFit()
-                                            .frame(width: 35)
-                                        
-                                        Image(systemName: "chevron.up.chevron.down")
-                                            .resizable()
-                                            .renderingMode(.template)
-                                            .foregroundColor(.secondary)
-                                            .scaledToFit()
-                                            .frame(width: 10)
+                                            .frame(width: 25)
                                     }
-                                }
-                                .padding(.horizontal)
-                                .sheet(isPresented: $showModal) {
-                                    GameRegion(alpha2Bind: $newRequest.region)
+                                    
+                                    
+                                    Image(systemName: "chevron.up.chevron.down")
+                                        .resizable()
+                                        .renderingMode(.template)
+                                        .foregroundColor(.secondary)
+                                        .scaledToFit()
+                                        .frame(width: 10)
                                 }
                             }
-                            .padding(.horizontal)
-                        
+                            .sheet(isPresented: $showModal) {
+                                GameRegion(alpha2Bind: $newRequest.region)
+                            }
+                            .padding(.top, 5)
+                            
+                        }
+                        .padding()
+                        .background(Color("CardBG"))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                         
                     }
+                    .padding(.horizontal)
                 }
             }
         }

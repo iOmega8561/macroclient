@@ -65,8 +65,12 @@ struct LobbyDetails: View {
                     Divider()
                         .background(.primary)
                     
-                    HStack {
-                        Image(systemName: "hourglass")
+                    HStack(alignment: .bottom) {
+                        Image("Bomb")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 20, height: 20)
+                        
                         Text(expireDate, formatter: dateFormatter)
                     }
                     
@@ -96,10 +100,16 @@ struct LobbyDetails: View {
                                 Spacer()
                                 Text(request.plat)
                                     .font(.headline)
-                                Image(request.plat)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 35.0, height: 35.0)
+                                ZStack(alignment: .center) {
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .fill(Color("BDisabled"))
+                                        .frame(width: 31, height: 31)
+                                    
+                                    Image(request.plat)
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 28.0, height: 28.0)
+                                }
                             }
                             
                             Divider()
@@ -115,6 +125,7 @@ struct LobbyDetails: View {
                                 
                                 ZStack {
                                     RoundedRectangle(cornerRadius: 2)
+                                        .fill(Color("BDisabled"))
                                         .frame(width: 29,height: 22)
                                     
                                     Image(request.region)
