@@ -48,48 +48,50 @@ struct ChatScreen: View {
 
     // MARK: -
     var body: some View {
-        ZStack {
-            Color("BG")
-                .ignoresSafeArea()
-            
-            VStack {
-                // Chat history.
-                ScrollView {
-                    ScrollViewReader{ proxy in
-                        LazyVStack(spacing: 8) {
-                            ForEach(model.messages) { message in
-                                ChatMessageRow(message: message, isUser: message.user == username)
-                                    .id(message.id)
+        NavigationView {
+            ZStack {
+                Color("BG")
+                    .ignoresSafeArea()
+                
+                VStack {
+                    // Chat history.
+                    ScrollView {
+                        ScrollViewReader{ proxy in
+                            LazyVStack(spacing: 8) {
+                                ForEach(model.messages) { message in
+                                    ChatMessageRow(message: message, isUser: message.user == username)
+                                        .id(message.id)
+                                }
+                            }
+                            .padding(10)
+                            .onChange(of: model.messages.count) { _ in
+                                scrollToLastMessage(proxy: proxy)
                             }
                         }
-                        .padding(10)
-                        .onChange(of: model.messages.count) { _ in
-                            scrollToLastMessage(proxy: proxy)
-                        }
                     }
-                }
-                
-                // Message field.
-                HStack {
-                    TextField("Message", text: $message, onEditingChanged: { _ in }, onCommit: onCommit)
-                        .padding(10)
-                        .background(Color.secondary.opacity(0.2))
-                        .cornerRadius(5)
                     
-                    Button(action: onCommit) {
-                        Image(systemName: "arrowshape.turn.up.right")
-                            .font(.system(size: 20))
-                            .padding(6)
+                    // Message field.
+                    HStack {
+                        TextField("Message", text: $message, onEditingChanged: { _ in }, onCommit: onCommit)
+                            .padding(10)
+                            .background(Color.secondary.opacity(0.2))
+                            .cornerRadius(5)
+                        
+                        Button(action: onCommit) {
+                            Image(systemName: "arrowshape.turn.up.right")
+                                .font(.system(size: 20))
+                                .padding(6)
+                        }
+                        .cornerRadius(5)
+                        .disabled(message.isEmpty)
+                        .hoverEffect(.highlight)
                     }
-                    .cornerRadius(5)
-                    .disabled(message.isEmpty)
-                    .hoverEffect(.highlight)
+                    .padding()
                 }
-                .padding()
+                .navigationTitle("Chat")
+                .onAppear(perform: onAppear)
+                .onDisappear(perform: onDisappear)
             }
-            .navigationTitle("Chat")
-            .onAppear(perform: onAppear)
-            .onDisappear(perform: onDisappear)
         }
     }
 }
