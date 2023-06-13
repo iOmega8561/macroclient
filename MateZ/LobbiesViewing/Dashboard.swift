@@ -122,7 +122,7 @@ struct Dashboard: View {
                                 
                                 Menu {
                                     Toggle(isOn: $region) {
-                                        Label("Your country", systemImage: "flag")
+                                        Label("Your country", systemImage: "globe.europe.africa")
                                     }
                                     
                                     Divider()
@@ -134,7 +134,7 @@ struct Dashboard: View {
                                             }
                                         }
                                     } label: {
-                                        Label("Platform", systemImage: "macbook.and.ipad")
+                                        Label("Platform", systemImage: "macbook.and.iphone")
                                     }
                                 } label: {
                                     Image(systemName: "slider.horizontal.3")

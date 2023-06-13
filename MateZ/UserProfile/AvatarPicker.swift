@@ -33,12 +33,18 @@ struct AvatarPicker: View {
                                             RemoteImage(imgname: "user\(i)", squareSize: proxy.size.width / 3)
                                             
                                             if selection == i {
-                                                Image(systemName: "checkmark.circle.fill")
-                                                    .resizable()
-                                                    .scaledToFit()
-                                                    .frame(width: 30)
-                                                    .padding()
-                                                    .foregroundColor(.accentColor)
+                                                ZStack(alignment: .center) {
+                                                    Circle()
+                                                        .fill(Color("BDisabled"))
+                                                        .frame(width: 33)
+                                                    
+                                                    Image(systemName: "checkmark.circle.fill")
+                                                        .resizable()
+                                                        .scaledToFit()
+                                                        .frame(width: 30)
+                                                        .padding()
+                                                        .foregroundColor(.accentColor)
+                                                }
                                             }
                                         }
                                     }

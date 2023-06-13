@@ -20,7 +20,7 @@ struct GameRegion: View {
         } else {
             return regions
                     .map{$0.key}
-                    .filter { $0.contains(searchText) }
+                    .filter { $0.lowercased().contains(searchText.lowercased()) }
                     .sorted()
         }
     }
