@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		DDF7DA2C2A30AB6D00AE5393 /* ChatScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF7DA2B2A30AB6D00AE5393 /* ChatScreen.swift */; };
-		DDF9838D2A3B444800A39C8C /* BlackList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF9838C2A3B444800A39C8C /* BlackList.swift */; };
+		DDF9838D2A3B444800A39C8C /* ChatBlacklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF9838C2A3B444800A39C8C /* ChatBlacklist.swift */; };
 		DDF9838F2A3B445F00A39C8C /* ProfanityFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDF9838E2A3B445F00A39C8C /* ProfanityFilter.swift */; };
 		E317A2612A1FA5520007833E /* FavouritePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = E317A2602A1FA5520007833E /* FavouritePicker.swift */; };
 		E31CD9182A1662FE00C7C8CC /* Signup.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31CD9172A1662FE00C7C8CC /* Signup.swift */; };
@@ -44,7 +44,7 @@
 /* Begin PBXFileReference section */
 		DDF7DA2B2A30AB6D00AE5393 /* ChatScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatScreen.swift; sourceTree = "<group>"; };
 		DDF7DA2D2A30ABAF00AE5393 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		DDF9838C2A3B444800A39C8C /* BlackList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlackList.swift; sourceTree = "<group>"; };
+		DDF9838C2A3B444800A39C8C /* ChatBlacklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatBlacklist.swift; sourceTree = "<group>"; };
 		DDF9838E2A3B445F00A39C8C /* ProfanityFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfanityFilter.swift; sourceTree = "<group>"; };
 		E317A2602A1FA5520007833E /* FavouritePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritePicker.swift; sourceTree = "<group>"; };
 		E31CD9172A1662FE00C7C8CC /* Signup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signup.swift; sourceTree = "<group>"; };
@@ -89,13 +89,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		DDF9838B2A3B443500A39C8C /* Filter */ = {
+		DDF9838B2A3B443500A39C8C /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				DDF9838C2A3B444800A39C8C /* BlackList.swift */,
-				DDF9838E2A3B445F00A39C8C /* ProfanityFilter.swift */,
+				DDF7DA2B2A30AB6D00AE5393 /* ChatScreen.swift */,
 			);
-			path = Filter;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		E3371F9829F8438800A5F810 = {
@@ -120,9 +119,8 @@
 				DDF7DA2D2A30ABAF00AE5393 /* Info.plist */,
 				E3371FA429F8438800A5F810 /* App.swift */,
 				E31CD91B2A167FDB00C7C8CC /* StartupView.swift */,
-				DDF7DA2B2A30AB6D00AE5393 /* ChatScreen.swift */,
 				E37914222A30B8CF001343D4 /* DummyView.swift */,
-				DDF9838B2A3B443500A39C8C /* Filter */,
+				DDF9838B2A3B443500A39C8C /* Chat */,
 				E36393A82A2E100A005EAD9F /* OnBoarding */,
 				E382071E2A1BC216005293DA /* UserProfile */,
 				E366BB882A15067300438106 /* AuthenticationViews */,
@@ -147,6 +145,8 @@
 		E3371FB229F8447A00A5F810 /* DataHandling */ = {
 			isa = PBXGroup;
 			children = (
+				DDF9838C2A3B444800A39C8C /* ChatBlacklist.swift */,
+				DDF9838E2A3B445F00A39C8C /* ProfanityFilter.swift */,
 				E3BFC15C29FD496C0025609E /* AppData.swift */,
 				E3371FB329F844B400A5F810 /* WebAPI.swift */,
 				E3371FB529F846FB00A5F810 /* Model.swift */,
@@ -300,7 +300,7 @@
 				E3371FB429F844B400A5F810 /* WebAPI.swift in Sources */,
 				E36393AC2A2E19BA005EAD9F /* RegionSelection.swift in Sources */,
 				E3371FBA29F8502B00A5F810 /* CustomProgress.swift in Sources */,
-				DDF9838D2A3B444800A39C8C /* BlackList.swift in Sources */,
+				DDF9838D2A3B444800A39C8C /* ChatBlacklist.swift in Sources */,
 				E37914232A30B8CF001343D4 /* DummyView.swift in Sources */,
 				E395C3B32A38A42D009940F8 /* TagCloud.swift in Sources */,
 				E3BFC15A29FD30A50025609E /* Dashboard.swift in Sources */,
@@ -446,7 +446,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MateZ/Preview Content\"";
-				DEVELOPMENT_TEAM = TR7QYD9K6M;
+				DEVELOPMENT_TEAM = T8HX5554JX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MateZ/Info.plist;
@@ -483,7 +483,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"MateZ/Preview Content\"";
-				DEVELOPMENT_TEAM = TR7QYD9K6M;
+				DEVELOPMENT_TEAM = T8HX5554JX;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = MateZ/Info.plist;
