@@ -81,7 +81,7 @@ struct ChatScreen: View {
                     }
                     .padding()
                 }
-                .navigationTitle("Global Chat")
+                .navigationTitle("Global chat")
                 .onAppear(perform: onAppear)
                 .onDisappear(perform: onDisappear)
             }
