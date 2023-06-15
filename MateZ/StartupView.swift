@@ -6,12 +6,14 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct StartupView: View {
     @EnvironmentObject var appData: AppData
     
     @State var isLoading: Bool = true
     @State var loggedIn: Bool = false
+    @State var biometricSuccess: Bool = false
     
     var body: some View {
         Group {
@@ -76,15 +78,50 @@ struct StartupView: View {
                     let response = await appData.lastsession()
                     
                     if response == "Success" {
-                        await appData.refreshProfile()
-                        
-                        loggedIn = true
+                        biometricLogin()
                     }
+                    
+                } else {
+                    isLoading = false
                 }
-                
-                isLoading = false
             } catch {
                 print("Error loading data")
+            }
+        }
+    }
+}
+
+extension StartupView {
+    private func biometricLogin() -> Void {
+        
+        let context = LAContext()
+        var error: NSError?
+        
+        // check whether biometric authentication is possible
+        if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            // it's possible, so go ahead and use it
+            let reason = "Security Reasons"
+            
+            context.evaluatePolicy(.deviceOwnerAuthentication, localizedReason: reason) { success, authenticationError in
+                // authentication has now completed
+                if success {
+                    Task {
+                        await appData.refreshProfile()
+                        loggedIn = true
+                        isLoading = false
+                    }
+                } else {
+                    Task {
+                        await appData.logout()
+                        isLoading = false
+                    }
+                }
+            }
+        } else {
+            Task {
+                await appData.refreshProfile()
+                loggedIn = true
+                isLoading = false
             }
         }
     }
