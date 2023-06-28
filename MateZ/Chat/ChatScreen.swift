@@ -156,7 +156,7 @@ private final class ChatScreenModel: ObservableObject {
 
         self.username = username
 
-        let url = URL(string: "ws://casarocco.keenetic.link:9132/chat")!
+        let url = URL(string: "ws://yourdomain.something:9132/chat")!
         webSocketTask = URLSession.shared.webSocketTask(with: url)
         webSocketTask?.receive(completionHandler: onReceive)
         webSocketTask?.resume()
