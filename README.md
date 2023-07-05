@@ -1,6 +1,8 @@
 # MateZ SwiftUI
 This is a SwiftUI iOS client for the MateZ Server, developed as a companion to showcase the MateZ project.
 
+![alt text](https://github.com/iOmega8561/MateZ_SwiftUI/blob/master/Screenshots/onboarding.png?raw=true)
+
 ## Current State
 The application is not finished but it's half the way done. It will probably never be completed but this code will be available as a showcase.
 
